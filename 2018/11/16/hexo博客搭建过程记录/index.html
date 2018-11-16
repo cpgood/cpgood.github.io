@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>hexo博客搭建过程记录 | Cpp&#39;Blog | 一个菜鸡的学习记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3f51b5">
+    
+    
+    <meta name="keywords" content="hexo,node">
+    <meta name="description" content="以前一直用的github.io搭的自己的博客，总觉得差点意思，还是自己整个服务器吧，以下是在阿里云centos7下完成的，记录一下。 Node环境与Git安装hexo基于nodeJs，所以首先要安装node 安装1234cd /usr/local/src/wget https://nodejs.org/dist/v10.13.0/node-v10.13.0-linux-x64.tar.xztar">
+<meta name="keywords" content="hexo,node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo博客搭建过程记录">
+<meta property="og:url" content="http://yoursite.com/2018/11/16/hexo博客搭建过程记录/index.html">
+<meta property="og:site_name" content="Cpp&#39;Blog">
+<meta property="og:description" content="以前一直用的github.io搭的自己的博客，总觉得差点意思，还是自己整个服务器吧，以下是在阿里云centos7下完成的，记录一下。 Node环境与Git安装hexo基于nodeJs，所以首先要安装node 安装1234cd /usr/local/src/wget https://nodejs.org/dist/v10.13.0/node-v10.13.0-linux-x64.tar.xztar">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://pi40bre2b.bkt.clouddn.com/2018-11-15-hexo博客搭建过程记录-20181115.png-sy">
+<meta property="og:updated_time" content="2018-11-16T03:30:34.048Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo博客搭建过程记录">
+<meta name="twitter:description" content="以前一直用的github.io搭的自己的博客，总觉得差点意思，还是自己整个服务器吧，以下是在阿里云centos7下完成的，记录一下。 Node环境与Git安装hexo基于nodeJs，所以首先要安装node 安装1234cd /usr/local/src/wget https://nodejs.org/dist/v10.13.0/node-v10.13.0-linux-x64.tar.xztar">
+<meta name="twitter:image" content="http://pi40bre2b.bkt.clouddn.com/2018-11-15-hexo博客搭建过程记录-20181115.png-sy">
+    
+        <link rel="alternate" type="application/atom+xml" title="Cpp&#39;Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/head-a.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">曹平</h5>
+          <a href="mailto:cpgodem@163.com" title="cpgodem@163.com" class="mail">cpgodem@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home/主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives/目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags/分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user-circle"></i>
+                About/关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cpgood" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github/同性交友
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">hexo博客搭建过程记录</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">hexo博客搭建过程记录</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-11-16T03:29:00.000Z" itemprop="datePublished" class="page-time">
+  2018-11-16
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Node环境与Git安装"><span class="post-toc-number">1.</span> <span class="post-toc-text">Node环境与Git安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#建立软链接"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">建立软链接</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#检验node是否已全局可用"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">检验node是否已全局可用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#cnpm"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">cnpm</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git安装"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">git安装</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#hexo安装"><span class="post-toc-number">2.</span> <span class="post-toc-text">hexo安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全局安装hexo"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">全局安装hexo</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初始化hexo项目"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">初始化hexo项目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#启动"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">启动</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主题的使用"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">主题的使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#hexo管理工具"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">hexo管理工具</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-hexo博客搭建过程记录" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">hexo博客搭建过程记录</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-11-16 11:29:00" datetime="2018-11-16T03:29:00.000Z" itemprop="datePublished">2018-11-16</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>以前一直用的github.io搭的自己的博客，总觉得差点意思，还是自己整个服务器吧，以下是在阿里云centos7下完成的，记录一下。</p>
+<h2 id="Node环境与Git安装"><a href="#Node环境与Git安装" class="headerlink" title="Node环境与Git安装"></a>Node环境与Git安装</h2><p>hexo基于nodeJs，所以首先要安装node</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src/</span><br><span class="line">wget https://nodejs.org/dist/v10.13.0/node-v10.13.0-linux-x64.tar.xz</span><br><span class="line">tar -xvf node-v10.13.0-linux-x64.tar.xz</span><br><span class="line">mv node-v10.13.0-linux-x64  nodejs</span><br></pre></td></tr></table></figure>
+<p>可以到<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a>下载需要的node版本，如果下载sourceCode源码版本，需要自己编译很长时间，不推荐，我下载的Linux Binaries (x64)</p>
+<p>查看 nodejs文件夹 下有是否有node 和npm文件，如果没有重新下载安装。</p>
+<h3 id="建立软链接"><a href="#建立软链接" class="headerlink" title="建立软链接"></a>建立软链接</h3><p>将npm和node命令转为全局命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/local/src/nodejs/bin/npm /usr/local/bin/npm</span><br><span class="line">ln -s /usr/local/src/nodejs/bin/node /usr/local/bin/node</span><br></pre></td></tr></table></figure>
+<h3 id="检验node是否已全局可用"><a href="#检验node是否已全局可用" class="headerlink" title="检验node是否已全局可用"></a>检验node是否已全局可用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+<h3 id="cnpm"><a href="#cnpm" class="headerlink" title="cnpm"></a>cnpm</h3><p>如果想使用cnpm 可以全局安装后，建立软链接，同2，不再赘述</p>
+<h3 id="git安装"><a href="#git安装" class="headerlink" title="git安装"></a>git安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install git</span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
+<h2 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h2><h3 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<h3 id="初始化hexo项目"><a href="#初始化hexo项目" class="headerlink" title="初始化hexo项目"></a>初始化hexo项目</h3><p>进入hexo项目文件夹，我的是在/home/apps/</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /home/apps/</span><br><span class="line">hexo init hexoblog</span><br><span class="line">cd hexoblog</span><br><span class="line">npm i</span><br></pre></td></tr></table></figure>
+<p>安装完成后目录如下</p>
+<ul>
+<li>node_modules：是依赖包</li>
+<li>public：存放的是生成的页面</li>
+<li>scaffolds：命令生成文章等的模板</li>
+<li>source：用命令创建的各种文章</li>
+<li>themes：主题</li>
+<li>_config.yml：整个博客的配置</li>
+<li>db.json：source解析所得到的</li>
+<li>package.json：项目所需模块项目的配置信息</li>
+</ul>
+<ol start="3">
+<li>配置</li>
+</ol>
+<p>网站的初始配置都在_config.yml中，我们可以在其中修改大部分配置。</p>
+<p>具体配置见 <a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener"><code>hexo官网</code></a></p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>安装完成后，hollow world 终于可以打开了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /home/apps/hexoblog</span><br><span class="line">hexo s</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+<p>现在打开服务器ip 4000 端口即可看到Hellow world 页面啦<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://pi40bre2b.bkt.clouddn.com/2018-11-15-hexo博客搭建过程记录-20181115.png-sy" alt="2018-11-15-hexo博客搭建过程记录-20181115" title="">
+                </div>
+                <div class="image-caption">2018-11-15-hexo博客搭建过程记录-20181115</div>
+            </figure></p>
+<h3 id="主题的使用"><a href="#主题的使用" class="headerlink" title="主题的使用"></a>主题的使用</h3><p>hexo安装完成后切换主题极其简单，我现在用的是Material Design 风格的Hexo主题 <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank" rel="noopener"><code>indigo</code></a> ,<br>更多主题可以在 <a href="https://hexo.io/themes/" target="_blank" rel="noopener"><code>官网</code></a> 查看，选择你心仪的主题即可，亦可自己开发DIY。</p>
+<blockquote>
+<p>别忘了给作者start哦</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/apps/hexoblog/</span><br><span class="line">git clone https://github.com/yscoder/hexo-theme-indigo.git themes/indigo</span><br></pre></td></tr></table></figure>
+<p>然后将_config.yml中 <code>theme</code> 选项设为 <code>indigo</code> 即可</p>
+<p>此主题需要安装依赖，具体步骤查看作者文档 <a href="https://github.com/yscoder/hexo-theme-indigo/wiki/%E5%AE%89%E8%A3%85" target="_blank" rel="noopener"><code>文档</code></a></p>
+<h3 id="hexo管理工具"><a href="#hexo管理工具" class="headerlink" title="hexo管理工具"></a>hexo管理工具</h3><p>如果我们每次写完都要把文件传到服务器，再 <code>hexo g -d</code>,那岂不是很麻烦，当然也可以接受，不过hexo-admin可以更方便的管理你的博文，是你在随便一个浏览器即可写作，美滋滋</p>
+<p>看这里即可，使用极其简单</p>
+<blockquote>
+<p><a href="https://jaredforsyth.com/hexo-admin/" target="_blank" rel="noopener">hexo-admin</a></p>
+</blockquote>
+<p>##结束</p>
+<p>如果不出意外，现在你已经可以写文章了，具体的文章写作和加载，请直接看官网吧。有啥意外可以问我😀😀😀</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+
+        
+        最后更新时间：2018-11-16 11:30:04 <br>文章原地址：<a href="/2018/11/16/hexo博客搭建过程记录/" target="_blank" rel="external">http://yoursite.com/2018/11/16/hexo博客搭建过程记录/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/head-a.jpg" alt="曹平">
+            曹平
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/11/16/hexo博客搭建过程记录/&title=《hexo博客搭建过程记录》 — Cpp'Blog&pic=http://yoursite.com/img/head-a.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/11/16/hexo博客搭建过程记录/&title=《hexo博客搭建过程记录》 — Cpp'Blog&source=曹平平的博客 前端" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/11/16/hexo博客搭建过程记录/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《hexo博客搭建过程记录》 — Cpp'Blog&url=http://yoursite.com/2018/11/16/hexo博客搭建过程记录/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/11/16/hexo博客搭建过程记录/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/11/16/centos下nginx的安装与自启/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">centos下nginx的安装与自启</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "lh7vq5TsQjg2rz1tex9MwWJy-gzGzoHsz",
+            appKey: "3eXcFvU8ojFXal5d0vfPS0ik",
+            avatar: "wavatar",
+            placeholder: "文采承殊渥,流传必绝伦",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>曹平 &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/11/16/hexo博客搭建过程记录/&title=《hexo博客搭建过程记录》 — Cpp'Blog&pic=http://yoursite.com/img/head-a.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/11/16/hexo博客搭建过程记录/&title=《hexo博客搭建过程记录》 — Cpp'Blog&source=曹平平的博客 前端" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/11/16/hexo博客搭建过程记录/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《hexo博客搭建过程记录》 — Cpp'Blog&url=http://yoursite.com/2018/11/16/hexo博客搭建过程记录/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/11/16/hexo博客搭建过程记录/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/11/16/hexo博客搭建过程记录/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
