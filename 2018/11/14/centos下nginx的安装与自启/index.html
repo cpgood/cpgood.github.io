@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>centos下nginx的安装与自启 | Cpp&#39;Blog | 一个菜鸡的学习记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3f51b5">
+    
+    
+    <meta name="keywords" content="linux,nginx">
+    <meta name="description" content="老早就想买个服务器，可惜囊中羞涩，一直没有下手，前两天逛阿里云看见个云翼计划，赶紧踩着青春的尾巴买了一年ECS自己没事耍耍也是好的呀  阿里云翼计划    废话不多说，这就开始 准备工作 服务器一台 我用的是阿里云centos7 xshell 其它亦可 linux基本操作  nginx和配置我们一会还要安装node，node自己本身可以作为服务器进行驱动，但是node本身对文件的处理能力并不是很好">
+<meta name="keywords" content="linux,nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos下nginx的安装与自启">
+<meta property="og:url" content="http://yoursite.com/2018/11/14/centos下nginx的安装与自启/index.html">
+<meta property="og:site_name" content="Cpp&#39;Blog">
+<meta property="og:description" content="老早就想买个服务器，可惜囊中羞涩，一直没有下手，前两天逛阿里云看见个云翼计划，赶紧踩着青春的尾巴买了一年ECS自己没事耍耍也是好的呀  阿里云翼计划    废话不多说，这就开始 准备工作 服务器一台 我用的是阿里云centos7 xshell 其它亦可 linux基本操作  nginx和配置我们一会还要安装node，node自己本身可以作为服务器进行驱动，但是node本身对文件的处理能力并不是很好">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-11-16T08:08:38.184Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="centos下nginx的安装与自启">
+<meta name="twitter:description" content="老早就想买个服务器，可惜囊中羞涩，一直没有下手，前两天逛阿里云看见个云翼计划，赶紧踩着青春的尾巴买了一年ECS自己没事耍耍也是好的呀  阿里云翼计划    废话不多说，这就开始 准备工作 服务器一台 我用的是阿里云centos7 xshell 其它亦可 linux基本操作  nginx和配置我们一会还要安装node，node自己本身可以作为服务器进行驱动，但是node本身对文件的处理能力并不是很好">
+    
+        <link rel="alternate" type="application/atom+xml" title="Cpp&#39;Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/head-a.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">曹平</h5>
+          <a href="mailto:cpgodem@163.com" title="cpgodem@163.com" class="mail">cpgodem@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home/主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives/目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags/分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user-circle"></i>
+                About/关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cpgood" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github/同性交友
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">centos下nginx的安装与自启</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">centos下nginx的安装与自启</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-11-14T07:49:00.000Z" itemprop="datePublished" class="page-time">
+  2018-11-14
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备工作"><span class="post-toc-number">1.</span> <span class="post-toc-text">准备工作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nginx和配置"><span class="post-toc-number">2.</span> <span class="post-toc-text">nginx和配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装完成"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">安装完成</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#启动"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">启动</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#将nginx加入可执行程序目录"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">将nginx加入可执行程序目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设置nginx开机自启动"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">设置nginx开机自启动</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-centos下nginx的安装与自启" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">centos下nginx的安装与自启</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-11-14 15:49:00" datetime="2018-11-14T07:49:00.000Z" itemprop="datePublished">2018-11-14</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>老早就想买个服务器，可惜囊中羞涩，一直没有下手，前两天逛阿里云看见个云翼计划，赶紧踩着青春的尾巴买了一年ECS<br>自己没事耍耍也是好的呀</p>
+<blockquote>
+<p><a href="https://promotion.aliyun.com/ntms/act/campus2018.html" target="_blank" rel="noopener">阿里云翼计划</a>  </p>
+</blockquote>
+<p>废话不多说，这就开始</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>服务器一台 我用的是阿里云centos7</li>
+<li>xshell 其它亦可</li>
+<li>linux基本操作</li>
+</ol>
+<h2 id="nginx和配置"><a href="#nginx和配置" class="headerlink" title="nginx和配置"></a>nginx和配置</h2><p>我们一会还要安装node，node自己本身可以作为服务器进行驱动，但是node本身对文件的处理能力并不是很好，所以当我们的生产环境中应尽量使用nginx来处理静态的资源以及反向代理，同时也解决了node分布式以及负载均衡的相关问题。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
+<li><p>首先安装make gcc之类的东西，编译用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install automake autoconf libtool make</span><br><span class="line">yum install gcc gcc-c++</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择nginx安装目录，我选的是 /usr/local/src</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>一般我们都需要先装pcre, zlib，前者为了重写rewrite，后者为了gzip压缩。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.42.tar.gz</span><br><span class="line">tar -zxvf pcre-8.42.tar.gz</span><br><span class="line">cd pcre-8.42</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>可以在<a href="ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/" target="_blank" rel="noopener">ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/</a>选择最新版本pcre</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://zlib.net/zlib-1.2.11.tar.gz</span><br><span class="line">tar -zxvf zlib-1.2.11.tar.gz</span><br><span class="line">cd zlib-1.2.11</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>可以在<a href="http://zlib.net/" target="_blank" rel="noopener">http://zlib.net/</a>选择最新版本zlib</p>
+<ol start="4">
+<li>安装ssl<br>网络通信安全，功能丰富且自包含的开源安全工具箱<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.openssl.org/source/openssl-1.1.1.tar.gz</span><br><span class="line">tar -zxvf openssl-1.1.1.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>可以在<a href="https://www.openssl.org/source/" target="_blank" rel="noopener">https://www.openssl.org/source/</a>选择最新版本openssl</p>
+<ol start="4">
+<li>安装nginx</li>
+</ol>
+<p>Nginx 一般有两个版本，分别是稳定版和开发版，您可以根据您的目的来选择这两个版本的其中一个，下面是把 Nginx 安装到 /usr/local/nginx 目录下的详细步骤：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-1.4.2.tar.gz</span><br><span class="line">tar -zxvf nginx-1.4.2.tar.gz</span><br><span class="line">cd nginx-1.4.2</span><br><span class="line"> </span><br><span class="line">./configure --sbin-path=/usr/local/nginx/nginx \</span><br><span class="line">--conf-path=/usr/local/nginx/nginx.conf \</span><br><span class="line">--pid-path=/usr/local/nginx/nginx.pid \</span><br><span class="line">--with-http_ssl_module \</span><br><span class="line">--with-pcre=/usr/src/local/pcre-8.42 \</span><br><span class="line">--with-zlib=/usr/src/local/zlib-1.2.11 \</span><br><span class="line">--with-openssl=/usr/src/local/openssl-1.1.1</span><br><span class="line"> </span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+<p>–with-pcre=/usr/src/local/pcre-8.42 指的是pcre-8.42 的源码路径。<br>–with-zlib=/usr/src/local/zlib-1.2.11 指的是zlib-1.2.11 的源码路径。</p>
+<h3 id="安装完成"><a href="#安装完成" class="headerlink" title="安装完成"></a>安装完成</h3><p>安装成功后 /usr/local/nginx 目录下如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">drwx------  2 nobody root    4096 Nov  2 10:16 client_body_temp</span><br><span class="line">-rw-r--r--  1 root   root    1034 Nov  1 18:43 fastcgi.conf</span><br><span class="line">-rw-r--r--  1 root   root    1034 Nov  1 18:43 fastcgi.conf.default</span><br><span class="line">-rw-r--r--  1 root   root     964 Nov  1 18:43 fastcgi_params</span><br><span class="line">-rw-r--r--  1 root   root     964 Nov  1 18:43 fastcgi_params.default</span><br><span class="line">drwx------  2 nobody root    4096 Nov  2 10:16 fastcgi_temp</span><br><span class="line">drwxr-xr-x  2 root   root    4096 Nov  2 11:11 html</span><br><span class="line">-rw-r--r--  1 root   root    2837 Nov  1 18:43 koi-utf</span><br><span class="line">-rw-r--r--  1 root   root    2223 Nov  1 18:43 koi-win</span><br><span class="line">drwxr-xr-x  2 root   root    4096 Nov  2 10:16 logs</span><br><span class="line">-rw-r--r--  1 root   root    3463 Nov  1 18:43 mime.types</span><br><span class="line">-rw-r--r--  1 root   root    3463 Nov  1 18:43 mime.types.default</span><br><span class="line">-rwxr-xr-x  1 root   root 7177456 Nov  1 18:43 nginx</span><br><span class="line">-rw-r--r--  1 root   root    3937 Nov 13 16:14 nginx.conf</span><br><span class="line">-rw-r--r--  1 root   root    2685 Nov  1 18:43 nginx.conf.default</span><br><span class="line">-rw-r--r--  1 root   root       5 Nov 12 10:02 nginx.pid</span><br><span class="line">drwx------ 12 nobody root    4096 Nov 13 15:29 proxy_temp</span><br><span class="line">-rw-r--r--  1 root   root     596 Nov  1 18:43 scgi_params</span><br><span class="line">-rw-r--r--  1 root   root     596 Nov  1 18:43 scgi_params.default</span><br><span class="line">drwx------  2 nobody root    4096 Nov  2 10:16 scgi_temp</span><br><span class="line">-rw-r--r--  1 root   root     623 Nov  1 18:43 uwsgi_params</span><br><span class="line">-rw-r--r--  1 root   root     623 Nov  1 18:43 uwsgi_params.default</span><br><span class="line">drwx------  2 nobody root    4096 Nov  2 10:16 uwsgi_temp</span><br><span class="line">-rw-r--r--  1 root   root    3610 Nov  1 18:43 win-utf</span><br></pre></td></tr></table></figure></p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/nginx/</span><br><span class="line">./nginx</span><br></pre></td></tr></table></figure>
+<p>现在打开浏览器，输入此机器IP即可看到  </p>
+<blockquote>
+<p>Welcome To Nginx</p>
+</blockquote>
+<p>安装成功！</p>
+<h3 id="将nginx加入可执行程序目录"><a href="#将nginx加入可执行程序目录" class="headerlink" title="将nginx加入可执行程序目录"></a>将nginx加入可执行程序目录</h3><p>竟然每次操作nginx都要进入/usr/local/nginx/<br>好麻烦有木有<br>没关系 软链接来帮你<br>/usr/local/bin目录是给用户放置自己的可执行程序的地方,<br>我们只需在这里建立nginx的软链接即可全局执行nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/local/nginx/nginx /usr/local/bin/nginx</span><br></pre></td></tr></table></figure>
+<p>大功告成！</p>
+<h3 id="设置nginx开机自启动"><a href="#设置nginx开机自启动" class="headerlink" title="设置nginx开机自启动"></a>设置nginx开机自启动</h3><p>每次开机我们都要启动nginx，同样巨麻烦，所以可以写一个自启动脚本，使其开机自启动，岂不美滋滋<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/rc.d/init.d</span><br><span class="line">vim nginxserver</span><br></pre></td></tr></table></figure></p>
+<p>这是nginx官网上的自启脚本，将这些粘贴进nginxserver</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># nginx - this script starts and stops the nginx daemon</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># chkconfig:   - 85 15</span></span><br><span class="line"><span class="comment"># description:  NGINX is an HTTP(S) server, HTTP(S) reverse \</span></span><br><span class="line"><span class="comment">#               proxy and IMAP/POP3 proxy server</span></span><br><span class="line"><span class="comment"># processname: nginx</span></span><br><span class="line"><span class="comment"># config:      /etc/nginx/nginx.conf</span></span><br><span class="line"><span class="comment"># config:      /etc/sysconfig/nginx</span></span><br><span class="line"><span class="comment"># pidfile:     /var/run/nginx.pid</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Source function library.</span></span><br><span class="line">. /etc/rc.d/init.d/<span class="built_in">functions</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Source networking configuration.</span></span><br><span class="line">. /etc/sysconfig/network</span><br><span class="line"></span><br><span class="line"><span class="comment"># Check that networking is up.</span></span><br><span class="line">[ <span class="string">"<span class="variable">$NETWORKING</span>"</span> = <span class="string">"no"</span> ] &amp;&amp; <span class="built_in">exit</span> 0</span><br><span class="line"></span><br><span class="line">nginx=<span class="string">"/usr/local/nginx/nginx"</span></span><br><span class="line">prog=$(basename <span class="variable">$nginx</span>)</span><br><span class="line"></span><br><span class="line">NGINX_CONF_FILE=<span class="string">"/usr/local/nginx/nginx.conf"</span></span><br><span class="line"></span><br><span class="line">[ -f /etc/sysconfig/nginx ] &amp;&amp; . /etc/sysconfig/nginx</span><br><span class="line"></span><br><span class="line">lockfile=/var/lock/subsys/nginx</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">make_dirs</span></span>() &#123;</span><br><span class="line">   <span class="comment"># make required directories</span></span><br><span class="line">   user=`<span class="variable">$nginx</span> -V 2&gt;&amp;1 | grep <span class="string">"configure arguments:.*--user="</span> | sed <span class="string">'s/[^*]*--user=\([^ ]*\).*/\1/g'</span> -`</span><br><span class="line">   <span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$user</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">      <span class="keyword">if</span> [ -z <span class="string">"`grep <span class="variable">$user</span> /etc/passwd`"</span> ]; <span class="keyword">then</span></span><br><span class="line">         useradd -M -s /bin/nologin <span class="variable">$user</span></span><br><span class="line">      <span class="keyword">fi</span></span><br><span class="line">      options=`<span class="variable">$nginx</span> -V 2&gt;&amp;1 | grep <span class="string">'configure arguments:'</span>`</span><br><span class="line">      <span class="keyword">for</span> opt <span class="keyword">in</span> <span class="variable">$options</span>; <span class="keyword">do</span></span><br><span class="line">          <span class="keyword">if</span> [ `<span class="built_in">echo</span> <span class="variable">$opt</span> | grep <span class="string">'.*-temp-path'</span>` ]; <span class="keyword">then</span></span><br><span class="line">              value=`<span class="built_in">echo</span> <span class="variable">$opt</span> | cut -d <span class="string">"="</span> -f 2`</span><br><span class="line">              <span class="keyword">if</span> [ ! -d <span class="string">"<span class="variable">$value</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">                  <span class="comment"># echo "creating" $value</span></span><br><span class="line">                  mkdir -p <span class="variable">$value</span> &amp;&amp; chown -R <span class="variable">$user</span> <span class="variable">$value</span></span><br><span class="line">              <span class="keyword">fi</span></span><br><span class="line">          <span class="keyword">fi</span></span><br><span class="line">       <span class="keyword">done</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">start</span></span>() &#123;</span><br><span class="line">    [ -x <span class="variable">$nginx</span> ] || <span class="built_in">exit</span> 5</span><br><span class="line">    [ -f <span class="variable">$NGINX_CONF_FILE</span> ] || <span class="built_in">exit</span> 6</span><br><span class="line">    make_dirs</span><br><span class="line">    <span class="built_in">echo</span> -n $<span class="string">"Starting <span class="variable">$prog</span>: "</span></span><br><span class="line">    daemon <span class="variable">$nginx</span> -c <span class="variable">$NGINX_CONF_FILE</span></span><br><span class="line">    retval=$?</span><br><span class="line">    <span class="built_in">echo</span></span><br><span class="line">    [ <span class="variable">$retval</span> -eq 0 ] &amp;&amp; touch <span class="variable">$lockfile</span></span><br><span class="line">    <span class="built_in">return</span> <span class="variable">$retval</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">stop</span></span>() &#123;</span><br><span class="line">    <span class="built_in">echo</span> -n $<span class="string">"Stopping <span class="variable">$prog</span>: "</span></span><br><span class="line">    killproc <span class="variable">$prog</span> -QUIT</span><br><span class="line">    retval=$?</span><br><span class="line">    <span class="built_in">echo</span></span><br><span class="line">    [ <span class="variable">$retval</span> -eq 0 ] &amp;&amp; rm -f <span class="variable">$lockfile</span></span><br><span class="line">    <span class="built_in">return</span> <span class="variable">$retval</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">restart</span></span>() &#123;</span><br><span class="line">    configtest || <span class="built_in">return</span> $?</span><br><span class="line">    stop</span><br><span class="line">    sleep 1</span><br><span class="line">    start</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">reload</span></span>() &#123;</span><br><span class="line">    configtest || <span class="built_in">return</span> $?</span><br><span class="line">    <span class="built_in">echo</span> -n $<span class="string">"Reloading <span class="variable">$prog</span>: "</span></span><br><span class="line">    killproc <span class="variable">$nginx</span> -HUP</span><br><span class="line">    RETVAL=$?</span><br><span class="line">    <span class="built_in">echo</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">force_reload</span></span>() &#123;</span><br><span class="line">    restart</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">configtest</span></span>() &#123;</span><br><span class="line">  <span class="variable">$nginx</span> -t -c <span class="variable">$NGINX_CONF_FILE</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">rh_status</span></span>() &#123;</span><br><span class="line">    status <span class="variable">$prog</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">rh_status_q</span></span>() &#123;</span><br><span class="line">    rh_status &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">    start)</span><br><span class="line">        rh_status_q &amp;&amp; <span class="built_in">exit</span> 0</span><br><span class="line">        <span class="variable">$1</span></span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        rh_status_q || <span class="built_in">exit</span> 0</span><br><span class="line">        <span class="variable">$1</span></span><br><span class="line">        ;;</span><br><span class="line">    restart|configtest)</span><br><span class="line">        <span class="variable">$1</span></span><br><span class="line">        ;;</span><br><span class="line">    reload)</span><br><span class="line">        rh_status_q || <span class="built_in">exit</span> 7</span><br><span class="line">        <span class="variable">$1</span></span><br><span class="line">        ;;</span><br><span class="line">    force-reload)</span><br><span class="line">        force_reload</span><br><span class="line">        ;;</span><br><span class="line">    status)</span><br><span class="line">        rh_status</span><br><span class="line">        ;;</span><br><span class="line">    condrestart|try-restart)</span><br><span class="line">        rh_status_q || <span class="built_in">exit</span> 0</span><br><span class="line">            ;;</span><br><span class="line">    *)</span><br><span class="line">        <span class="built_in">echo</span> $<span class="string">"Usage: <span class="variable">$0</span> &#123;start|stop|status|restart|condrestart|try-restart|reload|force-reload|configtest&#125;"</span></span><br><span class="line">        <span class="built_in">exit</span> 2</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>:wq保存退出</li>
+<li><p>增加脚本的可执行权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /etc/rc.d/init.d/nginxserver</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加脚本到开机自动启动项目中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/rc.d/init.d</span><br><span class="line">chkconfig --add nginxserver</span><br><span class="line">chkconfig nginxserver on</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>完事！</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+
+        
+        最后更新时间：2018-11-16 16:08:18 <br>文章原地址：<a href="/2018/11/14/centos下nginx的安装与自启/" target="_blank" rel="external">http://yoursite.com/2018/11/14/centos下nginx的安装与自启/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/head-a.jpg" alt="曹平">
+            曹平
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/11/14/centos下nginx的安装与自启/&title=《centos下nginx的安装与自启》 — Cpp'Blog&pic=http://yoursite.com/img/head-a.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/11/14/centos下nginx的安装与自启/&title=《centos下nginx的安装与自启》 — Cpp'Blog&source=曹平平的博客 前端" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/11/14/centos下nginx的安装与自启/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《centos下nginx的安装与自启》 — Cpp'Blog&url=http://yoursite.com/2018/11/14/centos下nginx的安装与自启/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/11/14/centos下nginx的安装与自启/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/11/15/hexo博客搭建过程记录/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">hexo博客搭建过程记录</h4>
+      </a>
+    </div>
+  
+
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "lh7vq5TsQjg2rz1tex9MwWJy-gzGzoHsz",
+            appKey: "3eXcFvU8ojFXal5d0vfPS0ik",
+            avatar: "wavatar",
+            placeholder: "文采承殊渥,流传必绝伦",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>曹平 &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/11/14/centos下nginx的安装与自启/&title=《centos下nginx的安装与自启》 — Cpp'Blog&pic=http://yoursite.com/img/head-a.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/11/14/centos下nginx的安装与自启/&title=《centos下nginx的安装与自启》 — Cpp'Blog&source=曹平平的博客 前端" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/11/14/centos下nginx的安装与自启/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《centos下nginx的安装与自启》 — Cpp'Blog&url=http://yoursite.com/2018/11/14/centos下nginx的安装与自启/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/11/14/centos下nginx的安装与自启/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/11/14/centos下nginx的安装与自启/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
