@@ -5,9 +5,9 @@
   <subtitle>一个菜鸡的学习记录</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://www.caopingping.com/"/>
   <updated>2018-11-16T07:53:45.930Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://www.caopingping.com/</id>
   
   <author>
     <name>曹平</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>linux下git免登陆设置</title>
-    <link href="http://yoursite.com/2018/11/16/linux%E4%B8%8Bgit%E5%85%8D%E7%99%BB%E9%99%86%E8%AE%BE%E7%BD%AE/"/>
-    <id>http://yoursite.com/2018/11/16/linux下git免登陆设置/</id>
+    <link href="http://www.caopingping.com/2018/11/16/linux%E4%B8%8Bgit%E5%85%8D%E7%99%BB%E9%99%86%E8%AE%BE%E7%BD%AE/"/>
+    <id>http://www.caopingping.com/2018/11/16/linux下git免登陆设置/</id>
     <published>2018-11-16T07:51:00.000Z</published>
     <updated>2018-11-16T07:53:45.930Z</updated>
     
@@ -36,14 +36,14 @@
     </summary>
     
     
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+      <category term="git" scheme="http://www.caopingping.com/tags/git/"/>
     
   </entry>
   
   <entry>
     <title>hexo博客搭建过程记录</title>
-    <link href="http://yoursite.com/2018/11/15/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/"/>
-    <id>http://yoursite.com/2018/11/15/hexo博客搭建过程记录/</id>
+    <link href="http://www.caopingping.com/2018/11/15/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/"/>
+    <id>http://www.caopingping.com/2018/11/15/hexo博客搭建过程记录/</id>
     <published>2018-11-15T04:50:00.000Z</published>
     <updated>2018-11-16T08:10:18.026Z</updated>
     
@@ -60,16 +60,16 @@
     </summary>
     
     
-      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+      <category term="hexo" scheme="http://www.caopingping.com/tags/hexo/"/>
     
-      <category term="node" scheme="http://yoursite.com/tags/node/"/>
+      <category term="node" scheme="http://www.caopingping.com/tags/node/"/>
     
   </entry>
   
   <entry>
     <title>centos下nginx的安装与自启</title>
-    <link href="http://yoursite.com/2018/11/14/centos%E4%B8%8Bnginx%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E8%87%AA%E5%90%AF/"/>
-    <id>http://yoursite.com/2018/11/14/centos下nginx的安装与自启/</id>
+    <link href="http://www.caopingping.com/2018/11/14/centos%E4%B8%8Bnginx%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E8%87%AA%E5%90%AF/"/>
+    <id>http://www.caopingping.com/2018/11/14/centos下nginx的安装与自启/</id>
     <published>2018-11-14T07:49:00.000Z</published>
     <updated>2018-11-16T08:08:38.184Z</updated>
     
@@ -87,9 +87,9 @@
     </summary>
     
     
-      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+      <category term="linux" scheme="http://www.caopingping.com/tags/linux/"/>
     
-      <category term="nginx" scheme="http://yoursite.com/tags/nginx/"/>
+      <category term="nginx" scheme="http://www.caopingping.com/tags/nginx/"/>
     
   </entry>
   
