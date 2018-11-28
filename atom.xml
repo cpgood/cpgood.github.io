@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.caopingping.com/"/>
-  <updated>2018-11-16T07:53:45.930Z</updated>
+  <updated>2018-11-28T07:09:45.184Z</updated>
   <id>http://www.caopingping.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>翠翠我爱你</title>
+    <link href="http://www.caopingping.com/2018/11/28/%E7%BF%A0%E7%BF%A0%E6%88%91%E7%88%B1%E4%BD%A0/"/>
+    <id>http://www.caopingping.com/2018/11/28/翠翠我爱你/</id>
+    <published>2018-11-28T07:09:40.000Z</published>
+    <updated>2018-11-28T07:09:45.184Z</updated>
+    
+    <content type="html"><![CDATA[<p>哈哈看这里</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;哈哈看这里&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>linux下git免登陆设置</title>
