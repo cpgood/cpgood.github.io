@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>JavaScript之数据属性和访问器属性 | 曹平的博客 | 一个菜鸡的学习记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3f51b5">
+    
+    
+    <meta name="keywords" content="JS">
+    <meta name="description" content="在javaScript中，对象的属性分为两种类型：数据属性和访问器属性。 数据属性数据属性包含的是一个数据值的位置，在这可以对数据值进行读写。 数据属性包含四个特性，分别是：  configurable：表示能否通过delete删除属性从而重新定义属性，能否修改属性的特性，或能否把属性修改为访问器属性，默认为true  enumerable:表示能否通过for-in循环返回属性  writable">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript之数据属性和访问器属性">
+<meta property="og:url" content="http://www.caopingping.com/2018/12/28/JavaScript之数据属性和访问器属性/index.html">
+<meta property="og:site_name" content="曹平的博客">
+<meta property="og:description" content="在javaScript中，对象的属性分为两种类型：数据属性和访问器属性。 数据属性数据属性包含的是一个数据值的位置，在这可以对数据值进行读写。 数据属性包含四个特性，分别是：  configurable：表示能否通过delete删除属性从而重新定义属性，能否修改属性的特性，或能否把属性修改为访问器属性，默认为true  enumerable:表示能否通过for-in循环返回属性  writable">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-12-28T08:27:43.608Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript之数据属性和访问器属性">
+<meta name="twitter:description" content="在javaScript中，对象的属性分为两种类型：数据属性和访问器属性。 数据属性数据属性包含的是一个数据值的位置，在这可以对数据值进行读写。 数据属性包含四个特性，分别是：  configurable：表示能否通过delete删除属性从而重新定义属性，能否修改属性的特性，或能否把属性修改为访问器属性，默认为true  enumerable:表示能否通过for-in循环返回属性  writable">
+    
+        <link rel="alternate" type="application/atom+xml" title="曹平的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/head-a.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">曹平</h5>
+          <a href="mailto:cpgodem@163.com" title="cpgodem@163.com" class="mail">cpgodem@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home/主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives/目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags/分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user-circle"></i>
+                About/关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cpgood" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github/同性交友
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">JavaScript之数据属性和访问器属性</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">JavaScript之数据属性和访问器属性</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-28T08:25:00.000Z" itemprop="datePublished" class="page-time">
+  2018-12-28
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据属性"><span class="post-toc-number">1.</span> <span class="post-toc-text">数据属性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#访问器属性"><span class="post-toc-number">2.</span> <span class="post-toc-text">访问器属性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#属性的读取与修改"><span class="post-toc-number">3.</span> <span class="post-toc-text">属性的读取与修改</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-JavaScript之数据属性和访问器属性" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">JavaScript之数据属性和访问器属性</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-28 16:25:00" datetime="2018-12-28T08:25:00.000Z" itemprop="datePublished">2018-12-28</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在javaScript中，对象的属性分为两种类型：数据属性和访问器属性。</p>
+<h3 id="数据属性"><a href="#数据属性" class="headerlink" title="数据属性"></a>数据属性</h3><p>数据属性包含的是一个数据值的位置，在这可以对数据值进行读写。</p>
+<p>数据属性包含四个特性，分别是：</p>
+<ul>
+<li><p>configurable：表示能否通过delete删除属性从而重新定义属性，能否修改属性的特性，或能否把属性修改为访问器属性，默认为true</p>
+</li>
+<li><p>enumerable:表示能否通过for-in循环返回属性</p>
+</li>
+<li><p>writable：表示能否修改属性的值</p>
+</li>
+<li><p>value：包含该属性的数据值。默认为undefined</p>
+</li>
+</ul>
+<h3 id="访问器属性"><a href="#访问器属性" class="headerlink" title="访问器属性"></a>访问器属性</h3><p>访问器属性不包含数据值，包含的是一对get和set方法，在读写访问器属性时，就是通过这两个方法来进行操作处理的。</p>
+<p>访问器属性包含的四个特性：</p>
+<ul>
+<li><p>configurable：表示能否通过delete删除属性从而重新定义属性，能否修改属性的特性，或能否把属性修改为访问器属性，默认为false</p>
+</li>
+<li><p>enumerable:表示能否通过for-in循环返回属性,默认为false</p>
+</li>
+<li><p>Get：在读取属性时调用的函数,默认值为undefined</p>
+</li>
+<li><p>Set：在写入属性时调用的函数,默认值为undefined</p>
+</li>
+</ul>
+<h3 id="属性的读取与修改"><a href="#属性的读取与修改" class="headerlink" title="属性的读取与修改"></a>属性的读取与修改</h3><blockquote>
+<p>对象的属性通过 <strong>Object.getOwnPropertyDescriptor()</strong> 获取</p>
+</blockquote>
+<blockquote>
+<p>对象的属性通过 <strong>Object.defineProperty()</strong> 修改</p>
+</blockquote>
+<p>数据属性和访问器属性是同级别的关系，只是由于功能不同把它们分成两派，按照它们所谓的 “特征值” 定义这个属性的性质。访问器属性只是因为它带有可以访问对象内其它属性的功能（通过 getter、setter 函数），并经过一些处理从而实现 “设置一个属性的值会导致其他属性发生变化”的效果。</p>
+<blockquote>
+<p>如果一个对象属性同时有(value或writable)和(get或set)关键字，将会产生一个异常</p>
+</blockquote>
+<blockquote>
+<p>如果只指定get方法,不指定set方法，那么这个属性是只读的，反之则是只写的</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">_b</span>:<span class="number">2</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyDescriptor(obj,<span class="string">'a'</span>) </span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">  &#123;</span></span><br><span class="line"><span class="comment">    value: 1, </span></span><br><span class="line"><span class="comment">    writable: true, </span></span><br><span class="line"><span class="comment">    enumerable: true, </span></span><br><span class="line"><span class="comment">    configurable: true</span></span><br><span class="line"><span class="comment">  &#125; </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//修改数据属性</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj,<span class="string">'a'</span>,&#123;</span><br><span class="line">  value: <span class="number">100</span>, </span><br><span class="line">  writable: <span class="literal">false</span>, </span><br><span class="line">  enumerable: <span class="literal">false</span>, </span><br><span class="line">  configurable: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyDescriptor(obj,<span class="string">'a'</span>) </span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">  &#123;</span></span><br><span class="line"><span class="comment">    value: 100, </span></span><br><span class="line"><span class="comment">    writable: false, </span></span><br><span class="line"><span class="comment">    enumerable: false, </span></span><br><span class="line"><span class="comment">    configurable: true</span></span><br><span class="line"><span class="comment">  &#125; </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">// 修改访问器属性</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj,<span class="string">'b'</span>,&#123;</span><br><span class="line">  get()&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._b</span><br><span class="line">  &#125;,</span><br><span class="line">  set(newVal)&#123;</span><br><span class="line">    <span class="keyword">this</span>._b = <span class="keyword">this</span>._b + newVal</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">obj.b = <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj.b) <span class="comment">// 7</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+
+        
+        最后更新时间：2018-12-28 16:27:60 <br>文章原地址：<a href="/2018/12/28/JavaScript之数据属性和访问器属性/" target="_blank" rel="external">http://www.caopingping.com/2018/12/28/JavaScript之数据属性和访问器属性/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.caopingping.com">
+            <img src="/img/head-a.jpg" alt="曹平">
+            曹平
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.caopingping.com/2018/12/28/JavaScript之数据属性和访问器属性/&title=《JavaScript之数据属性和访问器属性》 — 曹平的博客&pic=http://www.caopingping.com/img/head-a.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.caopingping.com/2018/12/28/JavaScript之数据属性和访问器属性/&title=《JavaScript之数据属性和访问器属性》 — 曹平的博客&source=曹平平的博客 前端" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.caopingping.com/2018/12/28/JavaScript之数据属性和访问器属性/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JavaScript之数据属性和访问器属性》 — 曹平的博客&url=http://www.caopingping.com/2018/12/28/JavaScript之数据属性和访问器属性/&via=http://www.caopingping.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.caopingping.com/2018/12/28/JavaScript之数据属性和访问器属性/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/27/HTTP系统学习/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">HTTP系统学习</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "lh7vq5TsQjg2rz1tex9MwWJy-gzGzoHsz",
+            appKey: "3eXcFvU8ojFXal5d0vfPS0ik",
+            avatar: "wavatar",
+            placeholder: "文采承殊渥,流传必绝伦",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">署名4.0国际 (CC BY 4.0)</a></span>
+        </p>
+
+    </div>
+    <div class="bottom">
+        <p><span>曹平 &copy; 2017 - 2018</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备18058783号</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.caopingping.com/2018/12/28/JavaScript之数据属性和访问器属性/&title=《JavaScript之数据属性和访问器属性》 — 曹平的博客&pic=http://www.caopingping.com/img/head-a.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.caopingping.com/2018/12/28/JavaScript之数据属性和访问器属性/&title=《JavaScript之数据属性和访问器属性》 — 曹平的博客&source=曹平平的博客 前端" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.caopingping.com/2018/12/28/JavaScript之数据属性和访问器属性/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JavaScript之数据属性和访问器属性》 — 曹平的博客&url=http://www.caopingping.com/2018/12/28/JavaScript之数据属性和访问器属性/&via=http://www.caopingping.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.caopingping.com/2018/12/28/JavaScript之数据属性和访问器属性/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://www.caopingping.com/2018/12/28/JavaScript之数据属性和访问器属性/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
