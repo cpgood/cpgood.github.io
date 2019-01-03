@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="曹平的博客">
 <meta property="og:description" content="这篇文章是为了记录以下几个比较容易记忆混乱的方法  for…in (hasOwnProperty) for…of Object.keys() Object.getOwnPropertyNames()  for…in使用for..in循环时，返回的是所有能够通过对象访问的、可枚举的属性，既包括存在于实例中的属性，也包括存在于原型中的实例（实例+原型中的可枚举属性） 遍历对象for..in操作的主要目">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-01-03T01:35:08.276Z">
+<meta property="og:updated_time" content="2019-01-03T01:39:15.323Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Array和Object的迭代">
 <meta name="twitter:description" content="这篇文章是为了记录以下几个比较容易记忆混乱的方法  for…in (hasOwnProperty) for…of Object.keys() Object.getOwnPropertyNames()  for…in使用for..in循环时，返回的是所有能够通过对象访问的、可枚举的属性，既包括存在于实例中的属性，也包括存在于原型中的实例（实例+原型中的可枚举属性） 遍历对象for..in操作的主要目">
@@ -197,7 +197,7 @@
 </li>
 <li><p>对于不存在的数组项的处理</p>
 <p>对于数组来讲，我们知道如果将其length属性设置为大于数组项数的值，则新增的每一项都会取得undefined值。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">'red'</span>,<span class="string">'yellow'</span>,<span class="string">'blue'</span>]</span><br><span class="line">colors.length = <span class="number">5</span> </span><br><span class="line">colors.push(<span class="string">'orange'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> colors)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(colors[i])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出为 'red' 'yellow' 'blue' 'orange'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;i&lt;colors.length;i++)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(colors[i])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出为 'red' 'yellow' 'blue' undefined undefined ... 'orange'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">'red'</span>,<span class="string">'yellow'</span>,<span class="string">'blue'</span>]</span><br><span class="line">colors.length = <span class="number">5</span> </span><br><span class="line">colors.push(<span class="string">'orange'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> colors)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(colors[i])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出为 'red' 'yellow' 'blue' 'orange'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;i&lt;colors.length;i++)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(colors[i])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出为 'red' 'yellow' 'blue' undefined undefined 'orange'</span></span><br></pre></td></tr></table></figure>
 <p>可见for..in 循环数组不会枚举不存在的项，但这些项在内存中是真实存在的，我们可以删除这些项，也可以给他们赋值。</p>
 </li>
 <li><p>遍历顺序</p>
@@ -262,7 +262,7 @@
         
 
         
-        最后更新时间：2019-01-03 09:35:27 <br>文章原地址：<a href="/2019/1/2/Array和Object的迭代/" target="_blank" rel="external">http://www.caopingping.com/2019/1/2/Array和Object的迭代/</a>
+        最后更新时间：2019-01-03 09:39:32 <br>文章原地址：<a href="/2019/1/2/Array和Object的迭代/" target="_blank" rel="external">http://www.caopingping.com/2019/1/2/Array和Object的迭代/</a>
         
     </div>
     
