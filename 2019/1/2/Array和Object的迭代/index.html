@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="曹平的博客">
 <meta property="og:description" content="这篇文章是为了记录以下几个比较容易记忆混乱的方法  for…in (hasOwnProperty) for…of Object.keys() Object.getOwnPropertyNames()  for…in使用for..in循环时，返回的是所有能够通过对象访问的、可枚举的属性，既包括存在于实例中的属性，也包括存在于原型中的实例（实例+原型中的可枚举属性） 遍历对象for..in操作的主要目">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-01-03T01:39:15.323Z">
+<meta property="og:updated_time" content="2019-01-03T01:44:44.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Array和Object的迭代">
 <meta name="twitter:description" content="这篇文章是为了记录以下几个比较容易记忆混乱的方法  for…in (hasOwnProperty) for…of Object.keys() Object.getOwnPropertyNames()  for…in使用for..in循环时，返回的是所有能够通过对象访问的、可枚举的属性，既包括存在于实例中的属性，也包括存在于原型中的实例（实例+原型中的可枚举属性） 遍历对象for..in操作的主要目">
@@ -220,7 +220,7 @@
 <h2 id="Object-getOwnPropertyNames"><a href="#Object-getOwnPropertyNames" class="headerlink" title="Object.getOwnPropertyNames()"></a>Object.getOwnPropertyNames()</h2><p>Object.getOwnPropertyNames()方法返回对象的所有自身属性的属性名（<strong>包括不可枚举属性但不包括Symbol值作为名称的属性</strong>）组成的数组，但<strong>不会获取原型链上的属性</strong>。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">a,aa</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.a = a;</span><br><span class="line">  <span class="keyword">this</span>.getA = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.a;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 原型方法</span></span><br><span class="line">A.prototype.aaa = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> B = <span class="keyword">new</span> A(<span class="string">'b'</span>, <span class="string">'bb'</span>);</span><br><span class="line"><span class="comment">//自身方法</span></span><br><span class="line">B.myMethodA = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="comment">// 不可枚举方法</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(B, <span class="string">'myMethodB'</span>, &#123;</span><br><span class="line">  enumerable: <span class="literal">false</span>,</span><br><span class="line">  value: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(B); </span><br><span class="line"><span class="comment">//结果 ["a", "getA", "myMethodA", "myMethodB"]</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>只获取自身不可迭代属性：使用 <strong>Object.getOwnPropertyNames()</strong> 获得所有自身属性，通过 <strong>Object.keys()</strong> 获得自身可迭代属性，通过filter函数筛选即可。</p>
+<p>只获取自身不可枚举属性：使用 <strong>Object.getOwnPropertyNames()</strong> 获得所有自身属性，通过 <strong>Object.keys()</strong> 获得自身可枚举属性，通过filter函数筛选即可。</p>
 </blockquote>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
 <thead>
@@ -262,7 +262,7 @@
         
 
         
-        最后更新时间：2019-01-03 09:39:32 <br>文章原地址：<a href="/2019/1/2/Array和Object的迭代/" target="_blank" rel="external">http://www.caopingping.com/2019/1/2/Array和Object的迭代/</a>
+        最后更新时间：2019-01-03 09:44:24 <br>文章原地址：<a href="/2019/1/2/Array和Object的迭代/" target="_blank" rel="external">http://www.caopingping.com/2019/1/2/Array和Object的迭代/</a>
         
     </div>
     
