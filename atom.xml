@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.caopingping.com/"/>
-  <updated>2019-01-03T08:57:42.154Z</updated>
+  <updated>2019-03-19T07:14:13.041Z</updated>
   <id>http://www.caopingping.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>知识点整理-CSS</title>
+    <link href="http://www.caopingping.com/2019/3/19/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86-CSS/"/>
+    <id>http://www.caopingping.com/2019/3/19/知识点整理-CSS/</id>
+    <published>2019-03-19T07:13:00.000Z</published>
+    <updated>2019-03-19T07:14:13.041Z</updated>
+    
+    <content type="html"><![CDATA[<p>一看离上次写文已经三个月了竟然，果然坚持是最难的呀，过完年忙碌了两个月，该复习一下了，说不定什么时候找工作呢。</p><h2 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h2><p>当对文档进行布局（lay out）的时候，浏览器渲染引擎会根据CSS基础框盒模型（CSS basic box model），将所有元素表示为一个个矩形的盒子。</p><blockquote><p>每个盒子由四部分组成：内容content，内边界paddingm，边框border和外边界margin。而box-sizing属性定义了浏览器该如何计算盒子的总宽度和总高度。</p><ul><li><code>content-box</code> 标准盒模型，width与height只包含content的宽高。</li><li><code>border-box</code> IE盒模型，本人布局最爱，width和height包含content，padding，border，不包括margin。</li><li><code>padding-box</code> width 和 height 属性包括内容和内边距，但是不包括边框和外边距。只有Firefox实现了这个值，它在Firefox 50中被<code>删除</code>。</li><li><code>margin-box</code> 无浏览器实现</li></ul></blockquote><h2 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h2><p>块格式化上下文（Block Formatting Context，BFC） 是Web页面的可视化CSS渲染的一部分，是块盒子的布局过程发生的区域，也是浮动元素与其他元素交互的区域。</p><p>BFC包含创建它的元素内部的所有内容。  </p><ul><li>触发条件<ol><li>根元素</li><li>浮动 float != none</li><li>定位 position == absolute|fixed</li><li>dispaly display == inline-block|table</li><li>overflow overflow != visible</li></ol></li><li>表现<ol><li>在一个BFC中，垂直方向上，盒子是从包含块顶部开始一个一个布局的，两个相邻的盒子的垂直距离是有margin属性决定的，两个相邻的块级盒子的垂直外边距会产生塌陷。</li><li>在一个BFC中，水平方向上，每个盒子的左边缘都会接触包含块的左边缘（从右向左的格式则相反），<strong>除非出现浮动元素和其他元素相互作用的情况</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context#Specifications" target="_blank" rel="noopener">经典案例</a></li></ol></li><li>应用<ol><li>消除垂直外边距塌陷。</li><li>可以包含浮动元素，解决高度塌陷。</li><li>创建自适应布局 参考经典案例</li></ol></li></ul><h2 id="层叠上下文"><a href="#层叠上下文" class="headerlink" title="层叠上下文"></a>层叠上下文</h2><p>一图说明<br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://zy.caopingping.com/blog/2019-3-19-1.webp-sy" alt="层叠上下文" title="">                </div>                <div class="image-caption">层叠上下文</div>            </figure></p><h2 id="link-与-import-的区别"><a href="#link-与-import-的区别" class="headerlink" title="link 与 @import 的区别"></a>link 与 @import 的区别</h2><ol><li><p>从属关系区别<br>@import是 CSS 提供的语法规则，只有导入样式表的作用；link是HTML提供的标签，不仅可以加载 CSS 文件，还可以定义 RSS、rel 连接属性等。</p></li><li><p>加载顺序区别<br>加载页面时，link标签引入的 CSS 被同时加载；@import引入的 CSS 将在页面加载完毕后被加载。</p></li><li><p>兼容性区别<br>@import是 CSS2.1 才有的语法，故只可在 IE5+ 才能识别；link标签作为 HTML 元素，不存在兼容性问题。</p></li><li><p>DOM可控性区别<br>可以通过 JS 操作 DOM ，插入link标签来改变样式；由于 DOM 方法是基于文档的，无法使用@import的方式插入样式。</p></li></ol><h2 id="写在后边"><a href="#写在后边" class="headerlink" title="写在后边"></a>写在后边</h2><p>此文会持久更新，在此立下FLAG！！</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;一看离上次写文已经三个月了竟然，果然坚持是最难的呀，过完年忙碌了两个月，该复习一下了，说不定什么时候找工作呢。&lt;/p&gt;
+&lt;h2 id=&quot;盒模型&quot;&gt;&lt;a href=&quot;#盒模型&quot; class=&quot;headerlink&quot; title=&quot;盒模型&quot;&gt;&lt;/a&gt;盒模型&lt;/h2&gt;&lt;p&gt;当对文
+      
+    
+    </summary>
+    
+    
+      <category term="面试" scheme="http://www.caopingping.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="CSS" scheme="http://www.caopingping.com/tags/CSS/"/>
+    
+  </entry>
   
   <entry>
     <title>图片上传方案详解</title>
