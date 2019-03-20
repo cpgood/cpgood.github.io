@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://zy.caopingping.com/2019-3-20-知识点整理-JS-2019-3-30-1.png-sy">
 <meta property="og:image" content="http://zy.caopingping.com/2019-3-20-知识点整理-JS-2019-3-30-2.png-sy">
-<meta property="og:updated_time" content="2019-03-20T07:07:56.864Z">
+<meta property="og:updated_time" content="2019-03-20T07:13:48.271Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="知识点整理-JS">
 <meta name="twitter:description" content="此文是对常见JS基础方面的面试题整理。 继承：原型链与原型链相关的三个概念：    prototype(原型)：一个对象，用于实现对象的属性继承。 constructor(构造函数)：一个可以new的函数。只有函数才有prototype。 instance(实例)：构造函数new出来的对象，有一个proto属性，等于其父亲的prototype。三者关系见下一篇文章(FLAG!!)  执行上下文执行">
@@ -161,7 +161,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#继承：原型链"><span class="post-toc-number">1.</span> <span class="post-toc-text">继承：原型链</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#执行上下文"><span class="post-toc-number">2.</span> <span class="post-toc-text">执行上下文</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内存空间的分配"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">内存空间的分配</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#EC的类型"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">EC的类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#EC的组成"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">EC的组成</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#执行"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">执行</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#作用域"><span class="post-toc-number">3.</span> <span class="post-toc-text">作用域</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#闭包"><span class="post-toc-number">4.</span> <span class="post-toc-text">闭包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#经典问题"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">经典问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#script引入方式"><span class="post-toc-number">5.</span> <span class="post-toc-text">script引入方式</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#继承：原型链"><span class="post-toc-number">1.</span> <span class="post-toc-text">继承：原型链</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#执行上下文"><span class="post-toc-number">2.</span> <span class="post-toc-text">执行上下文</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内存空间的分配"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">内存空间的分配</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#EC的类型"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">EC的类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#EC的组成"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">EC的组成</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#执行"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">执行</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#作用域"><span class="post-toc-number">3.</span> <span class="post-toc-text">作用域</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#闭包"><span class="post-toc-number">4.</span> <span class="post-toc-text">闭包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#经典问题"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">经典问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#script引入方式"><span class="post-toc-number">5.</span> <span class="post-toc-text">script引入方式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#写在最后"><span class="post-toc-number">6.</span> <span class="post-toc-text">写在最后</span></a></li></ol>
         </nav>
     </aside>
 
@@ -238,12 +238,11 @@
 <p>之间的区别一图胜千言<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://zy.caopingping.com/2019-3-20-知识点整理-JS-2019-3-30-2.png-sy" alt="2019-3-20-知识点整理-JS-2019-3-30-2" title="">
+                    <img src="http://zy.caopingping.com/2019-3-20-知识点整理-JS-2019-3-30-2.png-sy" alt="区别图" title="">
                 </div>
-                <div class="image-caption">2019-3-20-知识点整理-JS-2019-3-30-2</div>
+                <div class="image-caption">区别图</div>
             </figure></p>
-<p>##写在最后 </p>
-<p>此文持续更新！！！</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>此文持续更新！！！</p>
 
         </div>
 
@@ -253,7 +252,7 @@
         
 
         
-        最后更新时间：2019-03-20 15:07:86 <br>文章原地址：<a href="/2019/3/20/知识点整理-JS/" target="_blank" rel="external">http://www.caopingping.com/2019/3/20/知识点整理-JS/</a>
+        最后更新时间：2019-03-20 15:13:27 <br>文章原地址：<a href="/2019/3/20/知识点整理-JS/" target="_blank" rel="external">http://www.caopingping.com/2019/3/20/知识点整理-JS/</a>
         
     </div>
     
