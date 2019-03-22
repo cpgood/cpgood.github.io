@@ -21,22 +21,22 @@
     
     
     <meta name="keywords" content="JS,面试">
-    <meta name="description" content="撸一遍原型链及其相关的知识点。 prototype和proto和constructor prototype是只有函数才有的属性。 __proto__是每个对象都有的属性。  现在我们的起点就是一个创建好的对象，由他开始寻找他的原型链。 他的 __proto__ 指向谁__proto__的指向取决于对象创建的方式。下面这张图是三种常见方式创建对象后，__proto__指向谁。">
+    <meta name="description" content="撸一遍原型链及其相关的知识点。 prototype和__proto__和constructor prototype是只有函数才有的属性。 __proto__是每个对象都有的属性。  现在我们的起点就是一个创建好的对象，由他开始寻找他的原型链。 他的 __proto__ 指向谁__proto__的指向取决于对象创建的方式。下面这张图是三种常见方式创建对象后，__proto__指向谁。">
 <meta name="keywords" content="JS,面试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS的继承：原型链">
 <meta property="og:url" content="http://www.caopingping.com/2019/3/22/JS的继承：原型链/index.html">
 <meta property="og:site_name" content="曹平的博客">
-<meta property="og:description" content="撸一遍原型链及其相关的知识点。 prototype和proto和constructor prototype是只有函数才有的属性。 __proto__是每个对象都有的属性。  现在我们的起点就是一个创建好的对象，由他开始寻找他的原型链。 他的 __proto__ 指向谁__proto__的指向取决于对象创建的方式。下面这张图是三种常见方式创建对象后，__proto__指向谁。">
+<meta property="og:description" content="撸一遍原型链及其相关的知识点。 prototype和__proto__和constructor prototype是只有函数才有的属性。 __proto__是每个对象都有的属性。  现在我们的起点就是一个创建好的对象，由他开始寻找他的原型链。 他的 __proto__ 指向谁__proto__的指向取决于对象创建的方式。下面这张图是三种常见方式创建对象后，__proto__指向谁。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://zy.caopingping.com/2019-3-21-JS的继承：原型链-2019-3-21-0.png-sy">
 <meta property="og:image" content="http://zy.caopingping.com/2019-3-21-JS的继承：原型链-2019-3-21-3.jpg-sy">
 <meta property="og:image" content="http://zy.caopingping.com/2019-3-21-JS的继承：原型链-2019-3-21-2.png">
 <meta property="og:image" content="http://zy.caopingping.com/2019-3-21-JS的继承：原型链-2019-3-22-0.jpg-sy">
-<meta property="og:updated_time" content="2019-03-22T06:30:05.901Z">
+<meta property="og:updated_time" content="2019-03-22T06:32:02.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS的继承：原型链">
-<meta name="twitter:description" content="撸一遍原型链及其相关的知识点。 prototype和proto和constructor prototype是只有函数才有的属性。 __proto__是每个对象都有的属性。  现在我们的起点就是一个创建好的对象，由他开始寻找他的原型链。 他的 __proto__ 指向谁__proto__的指向取决于对象创建的方式。下面这张图是三种常见方式创建对象后，__proto__指向谁。">
+<meta name="twitter:description" content="撸一遍原型链及其相关的知识点。 prototype和__proto__和constructor prototype是只有函数才有的属性。 __proto__是每个对象都有的属性。  现在我们的起点就是一个创建好的对象，由他开始寻找他的原型链。 他的 __proto__ 指向谁__proto__的指向取决于对象创建的方式。下面这张图是三种常见方式创建对象后，__proto__指向谁。">
 <meta name="twitter:image" content="http://zy.caopingping.com/2019-3-21-JS的继承：原型链-2019-3-21-0.png-sy">
     
         <link rel="alternate" type="application/atom+xml" title="曹平的博客" href="/atom.xml">
@@ -163,7 +163,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#prototype和proto和constructor"><span class="post-toc-number">1.</span> <span class="post-toc-text">prototype和proto和constructor</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#他的-proto-指向谁"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">他的 __proto__ 指向谁</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#他的-constructor-指向谁"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">他的 constructor 指向谁</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#什么是原型链"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">什么是原型链</span></a></li></ol></li></ol><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Object和Function"><span class="post-toc-number">2.</span> <span class="post-toc-text">Object和Function</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#instanceof究竟是运算什么的"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">instanceof究竟是运算什么的</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#再说Object和Function"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">再说Object和Function</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一个并没有什么用的小结论"><span class="post-toc-number">3.</span> <span class="post-toc-text">一个并没有什么用的小结论</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最后"><span class="post-toc-number">4.</span> <span class="post-toc-text">最后</span></a></li>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#prototype和-proto-和constructor"><span class="post-toc-number">1.</span> <span class="post-toc-text">prototype和__proto__和constructor</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#他的-proto-指向谁"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">他的 __proto__ 指向谁</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#他的-constructor-指向谁"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">他的 constructor 指向谁</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#什么是原型链"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">什么是原型链</span></a></li></ol></li></ol><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Object和Function"><span class="post-toc-number">2.</span> <span class="post-toc-text">Object和Function</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#instanceof究竟是运算什么的"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">instanceof究竟是运算什么的</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#再说Object和Function"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">再说Object和Function</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一个并没有什么用的小结论"><span class="post-toc-number">3.</span> <span class="post-toc-text">一个并没有什么用的小结论</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最后"><span class="post-toc-number">4.</span> <span class="post-toc-text">最后</span></a></li>
         </nav>
     </aside>
 
@@ -183,7 +183,7 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>撸一遍原型链及其相关的知识点。</p>
-<h2 id="prototype和proto和constructor"><a href="#prototype和proto和constructor" class="headerlink" title="prototype和proto和constructor"></a>prototype和<strong>proto</strong>和constructor</h2><ul>
+<h2 id="prototype和-proto-和constructor"><a href="#prototype和-proto-和constructor" class="headerlink" title="prototype和__proto__和constructor"></a>prototype和<code>__proto__</code>和constructor</h2><ul>
 <li><code>prototype</code>是只有函数才有的属性。</li>
 <li><code>__proto__</code>是每个对象都有的属性。</li>
 </ul>
@@ -192,9 +192,9 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://zy.caopingping.com/2019-3-21-JS的继承：原型链-2019-3-21-0.png-sy" alt="_proto_指向谁" title="">
+                    <img src="http://zy.caopingping.com/2019-3-21-JS的继承：原型链-2019-3-21-0.png-sy" alt="`__proto__指向谁`" title="">
                 </div>
-                <div class="image-caption">_proto_指向谁</div>
+                <div class="image-caption">`__proto__指向谁`</div>
             </figure>
 <h4 id="他的-constructor-指向谁"><a href="#他的-constructor-指向谁" class="headerlink" title="他的 constructor 指向谁"></a>他的 <code>constructor</code> 指向谁</h4><p>所有对象都会从他的原型上继承一个 <code>constructor</code> 属性,并且这个 <code>constructor</code> 等于他的构造函数。</p>
 <figure class="image-bubble">
@@ -267,7 +267,7 @@
         
 
         
-        最后更新时间：2019-03-22 14:30:90 <br>文章原地址：<a href="/2019/3/22/JS的继承：原型链/" target="_blank" rel="external">http://www.caopingping.com/2019/3/22/JS的继承：原型链/</a>
+        最后更新时间：2019-03-22 14:32:74 <br>文章原地址：<a href="/2019/3/22/JS的继承：原型链/" target="_blank" rel="external">http://www.caopingping.com/2019/3/22/JS的继承：原型链/</a>
         
     </div>
     
