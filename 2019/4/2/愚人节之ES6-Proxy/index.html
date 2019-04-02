@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>愚人节之ES6-Proxy | 曹平的博客 | 一个菜鸡的学习记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3f51b5">
+    
+    
+    <meta name="keywords" content="JS">
+    <meta name="description" content="愚人节快乐。复习一下 ES6 的 Proxy 新特性，即将到来的 vue3 也将用 Proxy 代替 Object.defineproperty 来实现数据响应式。 Proxy 是什么Proxy是 ES6 新增的功能，他可以用来自定义对象中的操作（如属性查找，赋值，枚举，函数调用等）。 语法 let p = new Proxy(target, handler);   target：用Proxy包装">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="愚人节之ES6-Proxy">
+<meta property="og:url" content="http://www.caopingping.com/2019/4/2/愚人节之ES6-Proxy/index.html">
+<meta property="og:site_name" content="曹平的博客">
+<meta property="og:description" content="愚人节快乐。复习一下 ES6 的 Proxy 新特性，即将到来的 vue3 也将用 Proxy 代替 Object.defineproperty 来实现数据响应式。 Proxy 是什么Proxy是 ES6 新增的功能，他可以用来自定义对象中的操作（如属性查找，赋值，枚举，函数调用等）。 语法 let p = new Proxy(target, handler);   target：用Proxy包装">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2019-04-02T06:16:59.961Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="愚人节之ES6-Proxy">
+<meta name="twitter:description" content="愚人节快乐。复习一下 ES6 的 Proxy 新特性，即将到来的 vue3 也将用 Proxy 代替 Object.defineproperty 来实现数据响应式。 Proxy 是什么Proxy是 ES6 新增的功能，他可以用来自定义对象中的操作（如属性查找，赋值，枚举，函数调用等）。 语法 let p = new Proxy(target, handler);   target：用Proxy包装">
+    
+        <link rel="alternate" type="application/atom+xml" title="曹平的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/head-a.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">曹平</h5>
+          <a href="mailto:cpgodem@163.com" title="cpgodem@163.com" class="mail">cpgodem@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home/主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives/目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags/分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user-circle"></i>
+                About/关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cpgood" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github/同性交友
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">愚人节之ES6-Proxy</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">愚人节之ES6-Proxy</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-02T06:16:00.000Z" itemprop="datePublished" class="page-time">
+  2019-04-02
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Proxy-是什么"><span class="post-toc-number">1.</span> <span class="post-toc-text">Proxy 是什么</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#语法"><span class="post-toc-number">2.</span> <span class="post-toc-text">语法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#handler"><span class="post-toc-number">3.</span> <span class="post-toc-text">handler</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Examples"><span class="post-toc-number">4.</span> <span class="post-toc-text">Examples</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-愚人节之ES6-Proxy" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">愚人节之ES6-Proxy</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-02 14:16:00" datetime="2019-04-02T06:16:00.000Z" itemprop="datePublished">2019-04-02</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>愚人节快乐。<br>复习一下 ES6 的 Proxy 新特性，即将到来的 vue3 也将用 Proxy 代替 Object.defineproperty 来实现数据响应式。</p>
+<h2 id="Proxy-是什么"><a href="#Proxy-是什么" class="headerlink" title="Proxy 是什么"></a>Proxy 是什么</h2><p><code>Proxy</code>是 ES6 新增的功能，他可以用来自定义对象中的操作（如属性查找，赋值，枚举，函数调用等）。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><blockquote>
+<p>let p = new Proxy(target, handler);</p>
+</blockquote>
+<ul>
+<li>target：用Proxy包装的目标对象，可以是任何类型的对象，包括原生数组，函数，甚至是另一个Proxy.</li>
+<li>handler: 一个对象，其属性是当执行一个操作时，定义代理行为的函数。</li>
+</ul>
+<h2 id="handler"><a href="#handler" class="headerlink" title="handler"></a>handler</h2><p>handler是一个占位符对象（placeholder object），包括了Proxy可以自定义的一些方法。</p>
+<p>一共有 13 种可代理操作，每种操作的属性名和触发这种操作的方式列举如下。注意，如果没有定义某种操作，那么这种操作会被转发到目标对象身上。</p>
+<ol>
+<li><code>handler.getPrototypeOf()</code><br>在读取代理对象的原型时触发该操作，比如在执行 Object.getPrototypeOf(proxy) 时。</li>
+<li><code>handler.setPrototypeOf()</code><br>在设置代理对象的原型时触发该操作，比如在执行 Object.setPrototypeOf(proxy, null) 时。</li>
+<li><code>handler.isExtensible()</code><br>在判断一个代理对象是否是可扩展时触发该操作，比如在执行 Object.isExtensible(proxy) 时。</li>
+<li><code>handler.preventExtensions()</code><br>在让一个代理对象不可扩展时触发该操作，比如在执行 Object.preventExtensions(proxy) 时。</li>
+<li><code>handler.getOwnPropertyDescriptor()</code><br>在获取代理对象某个属性的属性描述时触发该操作，比如在执行 Object.getOwnPropertyDescriptor(proxy, “foo”) 时。</li>
+<li><code>handler.defineProperty()</code><br>在定义代理对象某个属性时的属性描述时触发该操作，比如在执行 Object.defineProperty(proxy, “foo”, {}) 时。</li>
+<li><code>handler.has()</code><br>在判断代理对象是否拥有某个属性时触发该操作，比如在执行 “foo” in proxy 时。</li>
+<li><code>handler.get()</code><br>在读取代理对象的某个属性时触发该操作，比如在执行 proxy.foo 时。</li>
+<li><code>handler.set()</code><br>在给代理对象的某个属性赋值时触发该操作，比如在执行 proxy.foo = 1 时。</li>
+<li><code>handler.deleteProperty()</code><br>在删除代理对象的某个属性时触发该操作，比如在执行 delete proxy.foo 时。</li>
+<li><code>handler.ownKeys()</code><br>在获取代理对象的所有属性键时触发该操作，比如在执行 Object.getOwnPropertyNames(proxy) 时。</li>
+<li><code>handler.apply()</code><br>当目标对象为函数，且被调用时触发。</li>
+<li><code>handler.construct()</code><br>在给一个目标对象为构造函数的代理对象构造实例时触发该操作，比如在执行new proxy() 时。</li>
+</ol>
+<p>这些方法的参数基本上都有多个，各有异同，看<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler#%E6%96%B9%E6%B3%95" target="_blank" rel="noopener">文档</a>吧。</p>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><ol>
+<li><p>基础示例</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> target = &#123;<span class="attr">a</span>:<span class="number">1</span>&#125;</span><br><span class="line"><span class="keyword">let</span> handler = &#123;</span><br><span class="line">    get:<span class="function"><span class="keyword">function</span>(<span class="params">target,property,receiver</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'target'</span>,target)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'property'</span>,property)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'receiver'</span>,receiver)</span><br><span class="line">        <span class="keyword">return</span> target[property] + <span class="string">'_new'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    set:<span class="function"><span class="keyword">function</span>(<span class="params">target, property, value, receiver</span>)</span>&#123;</span><br><span class="line">        target[property] = value</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target,handler)</span><br><span class="line"><span class="built_in">console</span>.log(p.a) <span class="comment">// 1_new</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为每一层都添加监控</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> target = &#123;</span><br><span class="line">    a:<span class="number">1</span>,</span><br><span class="line">    b:&#123;</span><br><span class="line">        c:<span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> handler = &#123;</span><br><span class="line">    get:<span class="function"><span class="keyword">function</span>(<span class="params">target,property,receiver</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'target:'</span>,target)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'property:'</span>,property)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'receiver:'</span>,receiver)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> target[property] === <span class="string">'object'</span> &amp;&amp; target[property] !== <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Proxy</span>(target[property], handler);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(target, property)+<span class="string">'new'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    set:<span class="function"><span class="keyword">function</span>(<span class="params">target, property, value, receiver</span>)</span>&#123;</span><br><span class="line">        target[property] = value</span><br><span class="line">        <span class="built_in">console</span>.log(target[property],<span class="string">'changed'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target,handler)</span><br><span class="line">p.b.c = <span class="number">3</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+
+        
+        最后更新时间：2019-04-02 14:16:96 <br>文章原地址：<a href="/2019/4/2/愚人节之ES6-Proxy/" target="_blank" rel="external">http://www.caopingping.com/2019/4/2/愚人节之ES6-Proxy/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.caopingping.com">
+            <img src="/img/head-a.jpg" alt="曹平">
+            曹平
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.caopingping.com/2019/4/2/愚人节之ES6-Proxy/&title=《愚人节之ES6-Proxy》 — 曹平的博客&pic=http://www.caopingping.com/img/head-a.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.caopingping.com/2019/4/2/愚人节之ES6-Proxy/&title=《愚人节之ES6-Proxy》 — 曹平的博客&source=曹平平的博客 前端" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.caopingping.com/2019/4/2/愚人节之ES6-Proxy/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《愚人节之ES6-Proxy》 — 曹平的博客&url=http://www.caopingping.com/2019/4/2/愚人节之ES6-Proxy/&via=http://www.caopingping.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.caopingping.com/2019/4/2/愚人节之ES6-Proxy/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/3/22/JS的继承：原型链/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">JS的继承：原型链</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "lh7vq5TsQjg2rz1tex9MwWJy-gzGzoHsz",
+            appKey: "3eXcFvU8ojFXal5d0vfPS0ik",
+            avatar: "wavatar",
+            placeholder: "文采承殊渥,流传必绝伦",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">署名4.0国际 (CC BY 4.0)</a></span>
+        </p>
+
+    </div>
+    <div class="bottom">
+        <p><span>曹平 &copy; 2017 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备18058783号</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.caopingping.com/2019/4/2/愚人节之ES6-Proxy/&title=《愚人节之ES6-Proxy》 — 曹平的博客&pic=http://www.caopingping.com/img/head-a.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.caopingping.com/2019/4/2/愚人节之ES6-Proxy/&title=《愚人节之ES6-Proxy》 — 曹平的博客&source=曹平平的博客 前端" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.caopingping.com/2019/4/2/愚人节之ES6-Proxy/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《愚人节之ES6-Proxy》 — 曹平的博客&url=http://www.caopingping.com/2019/4/2/愚人节之ES6-Proxy/&via=http://www.caopingping.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.caopingping.com/2019/4/2/愚人节之ES6-Proxy/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://www.caopingping.com/2019/4/2/愚人节之ES6-Proxy/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
