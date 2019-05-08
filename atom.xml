@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.caopingping.com/"/>
-  <updated>2019-04-02T06:16:59.961Z</updated>
+  <updated>2019-05-08T01:49:45.517Z</updated>
   <id>http://www.caopingping.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>很久之后之深拷贝</title>
+    <link href="http://www.caopingping.com/2019/5/8/%E5%BE%88%E4%B9%85%E4%B9%8B%E5%90%8E%E4%B9%8B%E6%B7%B1%E6%8B%B7%E8%B4%9D/"/>
+    <id>http://www.caopingping.com/2019/5/8/很久之后之深拷贝/</id>
+    <published>2019-05-08T01:49:00.000Z</published>
+    <updated>2019-05-08T01:49:45.517Z</updated>
+    
+    <content type="html"><![CDATA[<p>五一长假过去了，又该努力工作了呀，先回忆一下深拷贝吧，毕竟这是面试高发笔试题。</p><h2 id="变量的存储方式"><a href="#变量的存储方式" class="headerlink" title="变量的存储方式"></a>变量的存储方式</h2><ol><li>javascript变量包含两种不同数据类型的值：<code>基本类型和引用类型</code>。<ul><li>基本类型值指的是简单的数据段，包括es6里面新增的一共是有6种，具体如下：number、string、boolean、null、undefined、symbol。</li><li>引用类型值指那些可能由多个值构成的对象，只有一种如下：object。 </li></ul></li><li>javascript的变量的存储方式：<code>栈（stack）</code>和<code>堆（heap）</code>。<ul><li>栈：自动分配内存空间，系统自动释放，里面存放的是基本类型的值和引用类型的地址（一个指针）</li><li>堆：动态分配的内存，大小不定，也不会自动释放。里面存放引用类型的值。</li></ul></li></ol><blockquote><p>基本数据类型是按值访问的，因为可以操作保存在变量中的实际的值。   </p><p>引用类型的值是保存在内存中的对象。JavaScript 不允许直接访问内存中的位置，也就是说不能直接操作对象的内存空间。 在操作对象时， 实际上是在操作对象的引用而不是实际的对象。</p></blockquote><h2 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><p>想当年很长时间都觉得 <code>Object.assign()</code> 就是深拷贝，其实不然。</p><ol><li>直接赋值</li><li>Object.assign(target,source)</li><li>…展开运算符</li></ol><blockquote><p>这些方法都不会深拷贝一个对象。<br>直接赋值相当于直接赋值对象的内存引用地址，assign和…都相当于是展开赋值，如果值是基本类型，那么会直接赋值，如果是引用类型，那么会赋值其引用对象的地址。</p></blockquote><h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><ol><li>JSON.parse(JSON.stringify(object))<br>简单直接的方法，但是当对象出现循环引用是会报错，并且无法拷贝Symbol，undefined，function，不可枚举属性</li><li>递归赋值。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isObj</span>(<span class="params">source</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="keyword">typeof</span> source == <span class="string">'object'</span> || <span class="keyword">typeof</span> source == <span class="string">'function'</span>)&amp;&amp; source!<span class="literal">null</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 只解决date，reg类型，其他的可以自己添加</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span>(<span class="params">obj, hash = new Map(</span>)) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> cloneObj</span><br><span class="line">    <span class="keyword">let</span> Constructor = obj.constructor</span><br><span class="line">    <span class="keyword">switch</span>(Constructor)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="built_in">RegExp</span>:</span><br><span class="line">            cloneObj = <span class="keyword">new</span> Constructor(obj)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">case</span> <span class="built_in">Date</span>:</span><br><span class="line">            cloneObj = <span class="keyword">new</span> Constructor(obj.getTime())</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">if</span>(hash.has(obj)) <span class="keyword">return</span> hash.get(obj) <span class="comment">// 针对环</span></span><br><span class="line">            cloneObj = <span class="keyword">new</span> Constructor()</span><br><span class="line">            hash.set(obj, cloneObj)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">        cloneObj[key] = isObj(obj[key]) ? deepCopy(obj[key], hash) : obj[key];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cloneObj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;五一长假过去了，又该努力工作了呀，先回忆一下深拷贝吧，毕竟这是面试高发笔试题。&lt;/p&gt;
+&lt;h2 id=&quot;变量的存储方式&quot;&gt;&lt;a href=&quot;#变量的存储方式&quot; class=&quot;headerlink&quot; title=&quot;变量的存储方式&quot;&gt;&lt;/a&gt;变量的存储方式&lt;/h2&gt;&lt;ol&gt;
+&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="JS" scheme="http://www.caopingping.com/tags/JS/"/>
+    
+  </entry>
   
   <entry>
     <title>愚人节之ES6-Proxy</title>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>很久之后之深拷贝 | 曹平的博客 | 一个菜鸡的学习记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3f51b5">
+    
+    
+    <meta name="keywords" content="JS">
+    <meta name="description" content="五一长假过去了，又该努力工作了呀，先回忆一下深拷贝吧，毕竟这是面试高发笔试题。 变量的存储方式 javascript变量包含两种不同数据类型的值：基本类型和引用类型。 基本类型值指的是简单的数据段，包括es6里面新增的一共是有6种，具体如下：number、string、boolean、null、undefined、symbol。 引用类型值指那些可能由多个值构成的对象，只有一种如下：object。">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="很久之后之深拷贝">
+<meta property="og:url" content="http://www.caopingping.com/2019/5/8/很久之后之深拷贝/index.html">
+<meta property="og:site_name" content="曹平的博客">
+<meta property="og:description" content="五一长假过去了，又该努力工作了呀，先回忆一下深拷贝吧，毕竟这是面试高发笔试题。 变量的存储方式 javascript变量包含两种不同数据类型的值：基本类型和引用类型。 基本类型值指的是简单的数据段，包括es6里面新增的一共是有6种，具体如下：number、string、boolean、null、undefined、symbol。 引用类型值指那些可能由多个值构成的对象，只有一种如下：object。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2019-05-08T01:49:45.517Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="很久之后之深拷贝">
+<meta name="twitter:description" content="五一长假过去了，又该努力工作了呀，先回忆一下深拷贝吧，毕竟这是面试高发笔试题。 变量的存储方式 javascript变量包含两种不同数据类型的值：基本类型和引用类型。 基本类型值指的是简单的数据段，包括es6里面新增的一共是有6种，具体如下：number、string、boolean、null、undefined、symbol。 引用类型值指那些可能由多个值构成的对象，只有一种如下：object。">
+    
+        <link rel="alternate" type="application/atom+xml" title="曹平的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/head-a.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">曹平</h5>
+          <a href="mailto:cpgodem@163.com" title="cpgodem@163.com" class="mail">cpgodem@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home/主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives/目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags/分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user-circle"></i>
+                About/关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cpgood" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github/同性交友
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">很久之后之深拷贝</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">很久之后之深拷贝</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-05-08T01:49:00.000Z" itemprop="datePublished" class="page-time">
+  2019-05-08
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#变量的存储方式"><span class="post-toc-number">1.</span> <span class="post-toc-text">变量的存储方式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#浅拷贝"><span class="post-toc-number">2.</span> <span class="post-toc-text">浅拷贝</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深拷贝"><span class="post-toc-number">3.</span> <span class="post-toc-text">深拷贝</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-很久之后之深拷贝" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">很久之后之深拷贝</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-05-08 09:49:00" datetime="2019-05-08T01:49:00.000Z" itemprop="datePublished">2019-05-08</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>五一长假过去了，又该努力工作了呀，先回忆一下深拷贝吧，毕竟这是面试高发笔试题。</p>
+<h2 id="变量的存储方式"><a href="#变量的存储方式" class="headerlink" title="变量的存储方式"></a>变量的存储方式</h2><ol>
+<li>javascript变量包含两种不同数据类型的值：<code>基本类型和引用类型</code>。<ul>
+<li>基本类型值指的是简单的数据段，包括es6里面新增的一共是有6种，具体如下：number、string、boolean、null、undefined、symbol。</li>
+<li>引用类型值指那些可能由多个值构成的对象，只有一种如下：object。 </li>
+</ul>
+</li>
+<li>javascript的变量的存储方式：<code>栈（stack）</code>和<code>堆（heap）</code>。<ul>
+<li>栈：自动分配内存空间，系统自动释放，里面存放的是基本类型的值和引用类型的地址（一个指针）</li>
+<li>堆：动态分配的内存，大小不定，也不会自动释放。里面存放引用类型的值。</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>基本数据类型是按值访问的，因为可以操作保存在变量中的实际的值。   </p>
+<p>引用类型的值是保存在内存中的对象。JavaScript 不允许直接访问内存中的位置，也就是说不能直接操作对象的内存空间。 在操作对象时， 实际上是在操作对象的引用而不是实际的对象。</p>
+</blockquote>
+<h2 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><p>想当年很长时间都觉得 <code>Object.assign()</code> 就是深拷贝，其实不然。</p>
+<ol>
+<li>直接赋值</li>
+<li>Object.assign(target,source)</li>
+<li>…展开运算符</li>
+</ol>
+<blockquote>
+<p>这些方法都不会深拷贝一个对象。<br>直接赋值相当于直接赋值对象的内存引用地址，assign和…都相当于是展开赋值，如果值是基本类型，那么会直接赋值，如果是引用类型，那么会赋值其引用对象的地址。</p>
+</blockquote>
+<h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><ol>
+<li>JSON.parse(JSON.stringify(object))<br>简单直接的方法，但是当对象出现循环引用是会报错，并且无法拷贝Symbol，undefined，function，不可枚举属性</li>
+<li>递归赋值。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isObj</span>(<span class="params">source</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="keyword">typeof</span> source == <span class="string">'object'</span> || <span class="keyword">typeof</span> source == <span class="string">'function'</span>)&amp;&amp; source!<span class="literal">null</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 只解决date，reg类型，其他的可以自己添加</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span>(<span class="params">obj, hash = new Map(</span>)) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> cloneObj</span><br><span class="line">    <span class="keyword">let</span> Constructor = obj.constructor</span><br><span class="line">    <span class="keyword">switch</span>(Constructor)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="built_in">RegExp</span>:</span><br><span class="line">            cloneObj = <span class="keyword">new</span> Constructor(obj)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">case</span> <span class="built_in">Date</span>:</span><br><span class="line">            cloneObj = <span class="keyword">new</span> Constructor(obj.getTime())</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">if</span>(hash.has(obj)) <span class="keyword">return</span> hash.get(obj) <span class="comment">// 针对环</span></span><br><span class="line">            cloneObj = <span class="keyword">new</span> Constructor()</span><br><span class="line">            hash.set(obj, cloneObj)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">        cloneObj[key] = isObj(obj[key]) ? deepCopy(obj[key], hash) : obj[key];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cloneObj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+
+        
+        最后更新时间：2019-05-08 09:49:51 <br>文章原地址：<a href="/2019/5/8/很久之后之深拷贝/" target="_blank" rel="external">http://www.caopingping.com/2019/5/8/很久之后之深拷贝/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.caopingping.com">
+            <img src="/img/head-a.jpg" alt="曹平">
+            曹平
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.caopingping.com/2019/5/8/很久之后之深拷贝/&title=《很久之后之深拷贝》 — 曹平的博客&pic=http://www.caopingping.com/img/head-a.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.caopingping.com/2019/5/8/很久之后之深拷贝/&title=《很久之后之深拷贝》 — 曹平的博客&source=曹平平的博客 前端" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.caopingping.com/2019/5/8/很久之后之深拷贝/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《很久之后之深拷贝》 — 曹平的博客&url=http://www.caopingping.com/2019/5/8/很久之后之深拷贝/&via=http://www.caopingping.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.caopingping.com/2019/5/8/很久之后之深拷贝/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/4/2/愚人节之ES6-Proxy/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">愚人节之ES6-Proxy</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "lh7vq5TsQjg2rz1tex9MwWJy-gzGzoHsz",
+            appKey: "3eXcFvU8ojFXal5d0vfPS0ik",
+            avatar: "wavatar",
+            placeholder: "文采承殊渥,流传必绝伦",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">署名4.0国际 (CC BY 4.0)</a></span>
+        </p>
+
+    </div>
+    <div class="bottom">
+        <p><span>曹平 &copy; 2017 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备18058783号</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.caopingping.com/2019/5/8/很久之后之深拷贝/&title=《很久之后之深拷贝》 — 曹平的博客&pic=http://www.caopingping.com/img/head-a.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.caopingping.com/2019/5/8/很久之后之深拷贝/&title=《很久之后之深拷贝》 — 曹平的博客&source=曹平平的博客 前端" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.caopingping.com/2019/5/8/很久之后之深拷贝/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《很久之后之深拷贝》 — 曹平的博客&url=http://www.caopingping.com/2019/5/8/很久之后之深拷贝/&via=http://www.caopingping.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.caopingping.com/2019/5/8/很久之后之深拷贝/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://www.caopingping.com/2019/5/8/很久之后之深拷贝/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
