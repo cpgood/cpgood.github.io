@@ -20,9 +20,9 @@
     <meta name="theme-color" content="#3f51b5">
     
     
-    <meta name="keywords" content="">
+    <meta name="keywords" content="CSS">
     <meta name="description" content="clear:both用来清除浮动这是一直来的印象，但是自己很少会用这个，理解其实也不太正确，今天查查了资料，记录一下  float的脱离文档流float的原始作用是为了实现文字环绕的作用，可以理解为部分脱离文档流。 CSS中说脱离文档流是指盒子从普通的布局排版中拿出来，其他盒子进行放置时，会当其不存在而进行布局。而脱离文档流分为两种  完全脱离文档流：例如position:absolute，使用">
-<meta name="keywords" content="曹平 博客 前端 js vue node">
+<meta name="keywords" content="CSS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS浮动之clear:both的理解">
 <meta property="og:url" content="http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/index.html">
@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-4.png-sy">
 <meta property="og:image" content="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-5.png">
 <meta property="og:image" content="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-6.png">
-<meta property="og:updated_time" content="2019-12-04T09:43:04.570Z">
+<meta property="og:updated_time" content="2019-12-04T09:48:00.464Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS浮动之clear:both的理解">
 <meta name="twitter:description" content="clear:both用来清除浮动这是一直来的印象，但是自己很少会用这个，理解其实也不太正确，今天查查了资料，记录一下  float的脱离文档流float的原始作用是为了实现文字环绕的作用，可以理解为部分脱离文档流。 CSS中说脱离文档流是指盒子从普通的布局排版中拿出来，其他盒子进行放置时，会当其不存在而进行布局。而脱离文档流分为两种  完全脱离文档流：例如position:absolute，使用">
@@ -145,7 +145,7 @@
         <h1 class="title">CSS浮动之clear:both的理解</h1>
         <h5 class="subtitle">
             
-                <time datetime="2019-12-04T09:43:02.000Z" itemprop="datePublished" class="page-time">
+                <time datetime="2019-12-04T09:43:00.000Z" itemprop="datePublished" class="page-time">
   2019-12-04
 </time>
 
@@ -175,7 +175,7 @@
     <div class="post-card">
         <h1 class="post-card-title">CSS浮动之clear:both的理解</h1>
         <div class="post-meta">
-            <time class="post-time" title="2019-12-04 17:43:02" datetime="2019-12-04T09:43:02.000Z" itemprop="datePublished">2019-12-04</time>
+            <time class="post-time" title="2019-12-04 17:43:00" datetime="2019-12-04T09:43:00.000Z" itemprop="datePublished">2019-12-04</time>
 
             
 
@@ -212,21 +212,42 @@
                 <div class="image-caption">全浮动</div>
             </figure>
 </li>
-<li><p>C设置不浮动时：<br><img src="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-2.png-sy" alt="C设置不浮动"></p>
+<li><p>C设置不浮动时：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-2.png-sy" alt="C设置不浮动" title="">
+                </div>
+                <div class="image-caption">C设置不浮动</div>
+            </figure>
 </li>
-<li><p>给B添加clear:both/clear:left:<br><img src="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-3.png-sy" alt="给B添加clear"></p>
+<li><p>给B添加clear:both/clear:left：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-3.png-sy" alt="给B添加clear" title="">
+                </div>
+                <div class="image-caption">给B添加clear</div>
+            </figure>
 </li>
 </ol>
 <p>可以看到，B本身造成的浮动影响被清除了，他的顶边框在<code>任何在他之前的浮动盒子的底部</code>之下,但是没有浮动的盒子C仍然在AB的下边，其中的字体为浮动的盒子让出了位置。</p>
 <h3 id="给父盒子添加伪元素-after"><a href="#给父盒子添加伪元素-after" class="headerlink" title="给父盒子添加伪元素::after"></a>给父盒子添加伪元素::after</h3><ol>
-<li>现在，我们用一个<code>div（class:box）</code>包裹住ABC三个盒子，在<code>box</code>之外添加一个盒子<code>out</code>,其中ABC、out全部设置了浮动。现在他们长这样： <figure class="image-bubble">
+<li>现在，我们用一个<code>div（class:box）</code>包裹住ABC三个盒子，在<code>box</code>之外添加一个盒子<code>out</code>,其中ABC、out全部设置了浮动。现在他们长这样：<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-4.png-sy" alt="全家福" title="">
                 </div>
                 <div class="image-caption">全家福</div>
             </figure></li>
-<li>去掉out的浮动<br><img src="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-5.png" alt="去掉out的浮动"></li>
+<li>去掉out的浮动：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-5.png" alt="去掉out的浮动" title="">
+                </div>
+                <div class="image-caption">去掉out的浮动</div>
+            </figure>
+</li>
 </ol>
 <p>这是理所当然的。</p>
 <ol start="3">
@@ -246,7 +267,7 @@
         
 
         
-        最后更新时间：2019-12-04 17:43:57 <br>文章原地址：<a href="/2019/12/4/CSS浮动之clear-both的理解/" target="_blank" rel="external">http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/</a>
+        最后更新时间：2019-12-04 17:48:46 <br>文章原地址：<a href="/2019/12/4/CSS浮动之clear-both的理解/" target="_blank" rel="external">http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/</a>
         
     </div>
     
@@ -263,6 +284,8 @@
 
         <div class="post-footer">
             
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+
 
             
 <div class="page-share-wrap">
