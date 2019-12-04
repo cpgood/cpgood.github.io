@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>CSS浮动之clear:both的理解 | 曹平的博客 | 一个菜鸡的学习记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3f51b5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="clear:both用来清除浮动这是一直来的印象，但是自己很少会用这个，理解其实也不太正确，今天查查了资料，记录一下  float的脱离文档流float的原始作用是为了实现文字环绕的作用，可以理解为部分脱离文档流。 CSS中说脱离文档流是指盒子从普通的布局排版中拿出来，其他盒子进行放置时，会当其不存在而进行布局。而脱离文档流分为两种  完全脱离文档流：例如position:absolute，使用">
+<meta name="keywords" content="曹平 博客 前端 js vue node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS浮动之clear:both的理解">
+<meta property="og:url" content="http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/index.html">
+<meta property="og:site_name" content="曹平的博客">
+<meta property="og:description" content="clear:both用来清除浮动这是一直来的印象，但是自己很少会用这个，理解其实也不太正确，今天查查了资料，记录一下  float的脱离文档流float的原始作用是为了实现文字环绕的作用，可以理解为部分脱离文档流。 CSS中说脱离文档流是指盒子从普通的布局排版中拿出来，其他盒子进行放置时，会当其不存在而进行布局。而脱离文档流分为两种  完全脱离文档流：例如position:absolute，使用">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-1.png-sy">
+<meta property="og:image" content="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-2.png-sy">
+<meta property="og:image" content="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-3.png-sy">
+<meta property="og:image" content="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-4.png-sy">
+<meta property="og:image" content="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-5.png">
+<meta property="og:image" content="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-6.png">
+<meta property="og:updated_time" content="2019-12-04T09:43:04.570Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS浮动之clear:both的理解">
+<meta name="twitter:description" content="clear:both用来清除浮动这是一直来的印象，但是自己很少会用这个，理解其实也不太正确，今天查查了资料，记录一下  float的脱离文档流float的原始作用是为了实现文字环绕的作用，可以理解为部分脱离文档流。 CSS中说脱离文档流是指盒子从普通的布局排版中拿出来，其他盒子进行放置时，会当其不存在而进行布局。而脱离文档流分为两种  完全脱离文档流：例如position:absolute，使用">
+<meta name="twitter:image" content="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-1.png-sy">
+    
+        <link rel="alternate" type="application/atom+xml" title="曹平的博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/head-a.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">曹平</h5>
+          <a href="mailto:cpgodem@163.com" title="cpgodem@163.com" class="mail">cpgodem@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home/主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives/目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags/分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-user-circle"></i>
+                About/关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cpgood" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github/同性交友
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">CSS浮动之clear:both的理解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">CSS浮动之clear:both的理解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-04T09:43:02.000Z" itemprop="datePublished" class="page-time">
+  2019-12-04
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#float的脱离文档流"><span class="post-toc-number">1.</span> <span class="post-toc-text">float的脱离文档流</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#clear-both"><span class="post-toc-number">2.</span> <span class="post-toc-text">clear:both</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#清除影响的例子"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">清除影响的例子</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#给父盒子添加伪元素-after"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">给父盒子添加伪元素::after</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结束"><span class="post-toc-number">3.</span> <span class="post-toc-text">结束</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-CSS浮动之clear-both的理解" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">CSS浮动之clear:both的理解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-04 17:43:02" datetime="2019-12-04T09:43:02.000Z" itemprop="datePublished">2019-12-04</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p><code>clear:both</code>用来<code>清除浮动</code>这是一直来的印象，但是自己很少会用这个，理解其实也不太正确，今天查查了资料，记录一下</p>
+</blockquote>
+<h2 id="float的脱离文档流"><a href="#float的脱离文档流" class="headerlink" title="float的脱离文档流"></a>float的脱离文档流</h2><p>float的原始作用是为了实现文字环绕的作用，可以理解为部分脱离文档流。</p>
+<p>CSS中说脱离文档流是指盒子从普通的布局排版中拿出来，其他盒子进行放置时，会当其不存在而进行布局。而脱离文档流分为两种</p>
+<ul>
+<li>完全脱离文档流：例如<code>position:absolute</code>，使用绝对定位的盒子，其他盒子无论是其本身还是里面的任何元素都会无视这个绝对定位的盒子进行布局。</li>
+<li>部分脱离文档流：即<code>float</code>盒子，使用<code>float</code>属性后，其他block盒子会无视<code>float盒子</code>进行布局，但是其他盒子内的inline元素和inline-block元素依旧会为这个浮动的盒子让出位置。</li>
+</ul>
+<h2 id="clear-both"><a href="#clear-both" class="headerlink" title="clear:both"></a>clear:both</h2><blockquote>
+<p><code>clear:both</code>是作用于添加属性的盒子本身的</p>
+</blockquote>
+<blockquote>
+<p>在一个盒子上添加<code>clear:both</code>意味着这个盒子的顶边框将会<code>低于</code>在它<code>之前</code>的任何浮动盒子的<code>底外边距</code>。</p>
+</blockquote>
+<p>所以<code>clear:both</code>并不是清除浮动，而是清除浮动所造成的影响，浮动的盒子依旧是部分脱离文档流的。</p>
+<p>而clear的取值是left还是right,在我看来是取决于<code>想要低于的那个浮动盒子</code>的浮动方向。而<code>both</code>的取值，则会低于所有在在它之前的任何浮动盒子</p>
+<h3 id="清除影响的例子"><a href="#清除影响的例子" class="headerlink" title="清除影响的例子"></a>清除影响的例子</h3><p>我们设置三个盒子A、B、C</p>
+<ol>
+<li><p>当三个盒子都左浮动是时：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-1.png-sy" alt="全浮动" title="">
+                </div>
+                <div class="image-caption">全浮动</div>
+            </figure>
+</li>
+<li><p>C设置不浮动时：<br><img src="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-2.png-sy" alt="C设置不浮动"></p>
+</li>
+<li><p>给B添加clear:both/clear:left:<br><img src="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-3.png-sy" alt="给B添加clear"></p>
+</li>
+</ol>
+<p>可以看到，B本身造成的浮动影响被清除了，他的顶边框在<code>任何在他之前的浮动盒子的底部</code>之下,但是没有浮动的盒子C仍然在AB的下边，其中的字体为浮动的盒子让出了位置。</p>
+<h3 id="给父盒子添加伪元素-after"><a href="#给父盒子添加伪元素-after" class="headerlink" title="给父盒子添加伪元素::after"></a>给父盒子添加伪元素::after</h3><ol>
+<li>现在，我们用一个<code>div（class:box）</code>包裹住ABC三个盒子，在<code>box</code>之外添加一个盒子<code>out</code>,其中ABC、out全部设置了浮动。现在他们长这样： <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-4.png-sy" alt="全家福" title="">
+                </div>
+                <div class="image-caption">全家福</div>
+            </figure></li>
+<li>去掉out的浮动<br><img src="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-5.png" alt="去掉out的浮动"></li>
+</ol>
+<p>这是理所当然的。</p>
+<ol start="3">
+<li><p>给box添加一个伪元素  </p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">::after</span>&#123;</span><br><span class="line">  <span class="attribute">clear</span>: both;</span><br><span class="line">  <span class="attribute">height</span>:<span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">width</span>:<span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">background</span>:yellow;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <img src="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-6.png" alt="给box添加一个伪元素"></p>
+<p>现在外盒子<code>out</code>的浮动影响被清除了，但是这不是因为<code>clear:both</code>清除了浮动，而是因为<code>after伪元素</code>本身的浮动影响清除了，它现在处于任何在它之前的浮动盒子的下面，这也使得<code>box</code>的高度不再塌陷，所以<code>out</code>现在只是处于<code>box</code>下面，这是正常的文档流。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>这是一个CSS的基础知识点，但是一直没有认真看过，这次整理了一下，如果有错误的话，请看到这篇小文的大佬们指正。</p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+
+        
+        最后更新时间：2019-12-04 17:43:57 <br>文章原地址：<a href="/2019/12/4/CSS浮动之clear-both的理解/" target="_blank" rel="external">http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.caopingping.com">
+            <img src="/img/head-a.jpg" alt="曹平">
+            曹平
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/&title=《CSS浮动之clear:both的理解》 — 曹平的博客&pic=http://www.caopingping.com/img/head-a.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/&title=《CSS浮动之clear:both的理解》 — 曹平的博客&source=曹平平的博客 前端" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CSS浮动之clear:both的理解》 — 曹平的博客&url=http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/&via=http://www.caopingping.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/5/15/上呼吸道感染之前端安全/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">上呼吸道感染之前端安全</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "lh7vq5TsQjg2rz1tex9MwWJy-gzGzoHsz",
+            appKey: "3eXcFvU8ojFXal5d0vfPS0ik",
+            avatar: "wavatar",
+            placeholder: "文采承殊渥,流传必绝伦",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">署名4.0国际 (CC BY 4.0)</a></span>
+        </p>
+
+    </div>
+    <div class="bottom">
+        <p><span>曹平 &copy; 2017 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备18058783号</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/&title=《CSS浮动之clear:both的理解》 — 曹平的博客&pic=http://www.caopingping.com/img/head-a.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/&title=《CSS浮动之clear:both的理解》 — 曹平的博客&source=曹平平的博客 前端" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CSS浮动之clear:both的理解》 — 曹平的博客&url=http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/&via=http://www.caopingping.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
