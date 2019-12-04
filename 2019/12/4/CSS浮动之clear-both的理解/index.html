@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-4.png-sy">
 <meta property="og:image" content="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-5.png">
 <meta property="og:image" content="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-6.png">
-<meta property="og:updated_time" content="2019-12-04T09:48:00.464Z">
+<meta property="og:updated_time" content="2019-12-04T09:49:25.795Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS浮动之clear:both的理解">
 <meta name="twitter:description" content="clear:both用来清除浮动这是一直来的印象，但是自己很少会用这个，理解其实也不太正确，今天查查了资料，记录一下  float的脱离文档流float的原始作用是为了实现文字环绕的作用，可以理解为部分脱离文档流。 CSS中说脱离文档流是指盒子从普通的布局排版中拿出来，其他盒子进行放置时，会当其不存在而进行布局。而脱离文档流分为两种  完全脱离文档流：例如position:absolute，使用">
@@ -251,13 +251,18 @@
 </ol>
 <p>这是理所当然的。</p>
 <ol start="3">
-<li><p>给box添加一个伪元素  </p>
- <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">::after</span>&#123;</span><br><span class="line">  <span class="attribute">clear</span>: both;</span><br><span class="line">  <span class="attribute">height</span>:<span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">width</span>:<span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">background</span>:yellow;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> <img src="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-6.png" alt="给box添加一个伪元素"></p>
-<p>现在外盒子<code>out</code>的浮动影响被清除了，但是这不是因为<code>clear:both</code>清除了浮动，而是因为<code>after伪元素</code>本身的浮动影响清除了，它现在处于任何在它之前的浮动盒子的下面，这也使得<code>box</code>的高度不再塌陷，所以<code>out</code>现在只是处于<code>box</code>下面，这是正常的文档流。</p>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>这是一个CSS的基础知识点，但是一直没有认真看过，这次整理了一下，如果有错误的话，请看到这篇小文的大佬们指正。</p>
+<li>给box添加一个伪元素   <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">::after</span>&#123;</span><br><span class="line">  <span class="attribute">clear</span>: both;</span><br><span class="line">  <span class="attribute">height</span>:<span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">width</span>:<span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">background</span>:yellow;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://zy.caopingping.com/2019-12-4-clear~both的理解-2019-12-4-6.png" alt="给box添加一个伪元素" title="">
+                </div>
+                <div class="image-caption">给box添加一个伪元素</div>
+            </figure>
+<p>  现在外盒子<code>out</code>的浮动影响被清除了，但是这不是因为<code>clear:both</code>清除了浮动，而是因为<code>after伪元素</code>本身的浮动影响清除了，它现在处于任何在它之前的浮动盒子的下面，这也使得<code>box</code>的高度不再塌陷，所以<code>out</code>现在只是处于<code>box</code>下面，这是正常的文档流。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>  这是一个CSS的基础知识点，但是一直没有认真看过，这次整理了一下，如果有错误的话，请看到这篇小文的大佬们指正。</p>
 
         </div>
 
@@ -267,7 +272,7 @@
         
 
         
-        最后更新时间：2019-12-04 17:48:46 <br>文章原地址：<a href="/2019/12/4/CSS浮动之clear-both的理解/" target="_blank" rel="external">http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/</a>
+        最后更新时间：2019-12-04 17:49:79 <br>文章原地址：<a href="/2019/12/4/CSS浮动之clear-both的理解/" target="_blank" rel="external">http://www.caopingping.com/2019/12/4/CSS浮动之clear-both的理解/</a>
         
     </div>
     
